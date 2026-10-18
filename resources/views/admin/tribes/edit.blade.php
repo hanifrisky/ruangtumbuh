@@ -1,0 +1,41 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit Paket Modul Self-Help')
+@section('page-title', 'Edit Paket Modul')
+
+@section('content')
+<div class="max-w-md mx-auto space-y-6 animate-fade-in">
+    <div class="card p-4 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+            <h3 class="font-bold text-slate-800 text-lg">Form Edit Paket Modul</h3>
+            <a href="{{ route('admin.tribes.index') }}" class="text-sm text-slate-500 hover:text-blue-600 transition-colors">Kembali ke Daftar</a>
+        </div>
+
+        <form action="{{ route('admin.tribes.update', $tribe) }}" method="POST" class="space-y-6">
+            @csrf
+            @method('PUT')
+
+            <!-- Name -->
+            <div>
+                <label for="name" class="form-label">Nama Paket Modul Self-Help</label>
+                <input type="text" 
+                       id="name" 
+                       name="name" 
+                       value="{{ old('name', $tribe->name) }}" 
+                       required 
+                       class="form-input" 
+                       placeholder="Contoh: Modul Self-Help Resiliensi (SFBC)" />
+                @error('name')
+                    <p class="form-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3 justify-end">
+                <a href="{{ route('admin.tribes.index') }}" class="btn-secondary">Batal</a>
+                <button type="submit" class="btn-primary">Perbarui Paket Modul</button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
