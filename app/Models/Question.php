@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Question extends Model
 {
-    protected $fillable = ['text', 'category', 'dimension', 'option_group_id', 'order'];
+    protected $fillable = ['text', 'category', 'dimension', 'type', 'option_group_id', 'order'];
 
     public function optionGroup(): BelongsTo
     {

@@ -1,25 +1,25 @@
 @extends('layouts.base')
 
 @section('body')
-<div class="flex min-h-screen bg-[#FAF7F2]">
-    {{-- Sidebar (Warm Botanical Sanctuary Admin) --}}
-    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-sand-200 text-ink-800 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-sm flex flex-col justify-between overflow-y-auto">
+<div class="flex min-h-screen bg-[#F0FDF4]/50">
+    {{-- Sidebar (Modern Playful Emerald/Forest Admin) --}}
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-emerald-100 text-slate-800 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-sm flex flex-col justify-between overflow-y-auto">
         <div>
-            <div class="flex items-center justify-between gap-3 px-6 py-5 border-b border-sand-100">
+            <div class="flex items-center justify-between gap-3 px-6 py-5 border-b border-emerald-100">
                 <div class="flex items-center gap-3 min-w-0">
-                    <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-10 h-10 rounded-2xl object-cover shadow-sm border border-forest-100 flex-shrink-0">
+                    <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-10 h-10 rounded-2xl object-cover shadow-sm border border-emerald-100 flex-shrink-0">
                     <div class="min-w-0">
-                        <h1 class="font-serif font-bold text-base text-ink-900 leading-tight truncate">RUANG TUMBUH</h1>
-                        <p class="text-[11px] font-bold text-forest-700 uppercase tracking-wider truncate">Panel Admin</p>
+                        <h1 class="font-display font-black text-lg text-forest-950 leading-tight truncate">RUANG TUMBUH</h1>
+                        <p class="text-[10px] font-black text-emerald-700 uppercase tracking-wider truncate">Panel Admin</p>
                     </div>
                 </div>
-                <button type="button" onclick="toggleAdminSidebar()" class="lg:hidden p-1.5 text-ink-400 hover:text-ink-600 hover:bg-sand-100 rounded-xl transition-colors" aria-label="Tutup Menu">
+                <button type="button" onclick="toggleAdminSidebar()" class="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 hover:bg-emerald-50 rounded-xl transition-colors" aria-label="Tutup Menu">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
 
             <nav class="mt-4 px-3 space-y-1 pb-4">
-                <a href="{{ route('admin.dashboard') }}" class="nav-rail-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}" class="nav-rail-item {{ request()->routeIs('admin.dashboard') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
                     Dashboard
                 </a>

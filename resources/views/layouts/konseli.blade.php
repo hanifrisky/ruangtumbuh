@@ -1,18 +1,18 @@
 @extends('layouts.base')
 
 @section('body')
-<div class="min-h-screen flex bg-[#F8FAFC] text-slate-800">
+<div class="min-h-screen flex bg-[#F0FDF4]/50 text-slate-800">
     {{-- ======================================================================
-         DESKTOP LEFT NAVIGATION RAIL (60% White Surface with 30% Green Nav Rail)
+         DESKTOP LEFT NAVIGATION RAIL (Modern Playful Green Theme)
          ====================================================================== --}}
-    <aside class="hidden lg:flex lg:flex-col lg:w-72 bg-white border-r border-slate-200 p-6 justify-between fixed inset-y-0 z-30 shadow-[4px_0_24px_rgba(6,78,59,0.03)]">
+    <aside class="hidden lg:flex lg:flex-col lg:w-72 bg-white border-r border-emerald-100 p-6 justify-between fixed inset-y-0 z-30 shadow-[4px_0_24px_rgba(6,78,59,0.04)]">
         <div class="space-y-6">
             {{-- Brand Logo --}}
             <a href="{{ route('konseli.dashboard') }}" class="flex items-center gap-3 group">
-                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-10 h-10 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-11 h-11 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
                 <div>
-                    <span class="font-sans font-black text-lg text-forest-900 leading-none block">RUANG TUMBUH</span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-sky-600 block mt-1">Portal Konseli</span>
+                    <span class="font-display font-black text-xl text-forest-950 leading-none block">RUANG TUMBUH</span>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-700 block mt-1">Portal Siswa Konseli</span>
                 </div>
             </a>
 
@@ -21,37 +21,37 @@
                 <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 block mb-2">Navigasi Layanan</span>
 
                 <a href="{{ route('konseli.dashboard') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.dashboard') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.dashboard') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                     <span>Beranda & Alur</span>
                 </a>
 
                 <a href="{{ route('konseli.counselor.index') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.counselor.*') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.counselor.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     <span>Pilih Konselor</span>
                 </a>
 
                 <a href="{{ route('konseli.wellbeing.index') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.wellbeing.*') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.wellbeing.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                     <span>Asesmen Well-Being</span>
                 </a>
 
                 <a href="{{ route('konseli.counseling.index') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.counseling.*') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.counseling.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                     <span>Chat & Jadwal Meet</span>
                 </a>
 
                 <a href="{{ route('konseli.reflection.index') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.reflection.*') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.reflection.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                     <span>Jurnal Refleksi</span>
                 </a>
 
                 <a href="{{ route('konseli.evaluation.index') }}"
-                   class="nav-rail-item {{ request()->routeIs('konseli.evaluation.*') ? 'active' : '' }}">
+                   class="nav-rail-item {{ request()->routeIs('konseli.evaluation.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg>
                     <span>Evaluasi Diri</span>
                 </a>
@@ -59,14 +59,14 @@
         </div>
 
         {{-- Bottom Profile & Logout --}}
-        <div class="pt-4 border-t border-slate-200 space-y-3">
-            <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                <div class="w-9 h-9 rounded-xl bg-forest-800 text-white font-black flex items-center justify-center text-sm flex-shrink-0">
+        <div class="pt-4 border-t border-emerald-100 space-y-3">
+            <div class="flex items-center gap-3 p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-forest-800 text-white font-black flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 <div class="min-w-0 flex-1">
-                    <p class="text-xs font-bold text-forest-950 truncate">{{ auth()->user()->name }}</p>
-                    <p class="text-[10px] text-slate-500 truncate">Siswa Konseli</p>
+                    <p class="text-xs font-black text-forest-950 truncate">{{ auth()->user()->name }}</p>
+                    <p class="text-[10px] text-emerald-800 font-bold truncate">Siswa Konseli</p>
                 </div>
             </div>
 
@@ -81,17 +81,17 @@
     </aside>
 
     {{-- ======================================================================
-         MAIN CONTENT AREA (60% White Base Canvas)
+         MAIN CONTENT AREA
          ====================================================================== --}}
     <div class="flex-1 lg:ml-72 flex flex-col min-h-screen">
         {{-- Mobile Top Bar --}}
-        <header class="lg:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-3 flex items-center justify-between">
+        <header class="lg:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-emerald-100 px-4 py-3 flex items-center justify-between">
             <a href="{{ route('konseli.dashboard') }}" class="flex items-center gap-2">
-                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-7 h-7 rounded-lg object-cover">
-                <span class="font-sans font-black text-forest-900 text-sm">RUANG TUMBUH</span>
+                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-8 h-8 rounded-xl object-cover">
+                <span class="font-display font-black text-forest-950 text-base">RUANG TUMBUH</span>
             </a>
             <div class="flex items-center gap-2">
-                <span class="text-xs font-bold text-slate-700 max-w-[120px] truncate">{{ auth()->user()->name }}</span>
+                <span class="text-xs font-bold text-forest-950 max-w-[120px] truncate">{{ auth()->user()->name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="text-xs font-bold text-rose-600 px-2 py-1">Keluar</button>

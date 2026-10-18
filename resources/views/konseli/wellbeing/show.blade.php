@@ -15,7 +15,7 @@
         return [
             'id' => $q->id,
             'text' => $q->text,
-            'category' => $q->category === 'suicide_ideation' ? 'Deteksi Harapan Hidup & Ketahanan Diri' : 'Psychological Well-Being (Carol D. Ryff)',
+            'category' => $q->category === 'suicide_ideation' ? 'Identifikasi Diri (Ide Bunuh Diri)' : 'Psychological Well-Being (Carol D. Ryff)',
             'dimension' => $q->dimension ?? 'Well-Being',
             'options' => $q->optionGroup->items->sortBy('order')->values()->map(function($opt) {
                 return [

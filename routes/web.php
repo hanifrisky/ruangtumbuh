@@ -142,6 +142,7 @@ Route::middleware(['auth', 'role:konselor'])->prefix('konselor')->name('konselor
 
     // View Konseli Wellbeing Answers
     Route::get('/konseli/{user}/wellbeing', [\App\Http\Controllers\Konselor\KonseliWellbeingController::class, 'show'])->name('konseli.wellbeing');
+    Route::get('/konseli/{user}/wellbeing/{type}/pdf', [\App\Http\Controllers\Konselor\KonseliWellbeingController::class, 'downloadPdf'])->name('konseli.wellbeing.pdf');
     Route::delete('/konseli/{user}/wellbeing/{type}/reset', [\App\Http\Controllers\Konselor\KonseliWellbeingController::class, 'reset'])->name('konseli.wellbeing.reset');
 
     // View Konseli Self-Help Answers

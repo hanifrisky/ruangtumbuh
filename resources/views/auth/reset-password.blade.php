@@ -1,5 +1,15 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+    <div class="mb-6 space-y-2">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-forest-900 border border-emerald-300 text-xs font-black shadow-xs">
+            <span>🔐 Pembaruan Kata Sandi</span>
+        </div>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-forest-950 tracking-tight">Buat Kata Sandi Baru</h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+            Masukkan kata sandi baru untuk akun Ruang Tumbuh kamu.
+        </p>
+    </div>
+
+    <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
         @csrf
 
         <!-- Password Reset Token -->
@@ -7,33 +17,48 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <label for="email" class="form-label text-forest-950">Alamat Email</label>
+            <input id="email"
+                   class="form-input focus:border-emerald-600 focus:ring-emerald-500/20"
+                   type="email"
+                   name="email"
+                   value="{{ old('email', $request->email) }}"
+                   required
+                   autofocus
+                   autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div>
+            <label for="password" class="form-label text-forest-950">Kata Sandi Baru</label>
+            <input id="password"
+                   class="form-input focus:border-emerald-600 focus:ring-emerald-500/20"
+                   type="password"
+                   name="password"
+                   required
+                   autocomplete="new-password"
+                   placeholder="Minimal 8 karakter" />
+            <x-input-error :messages="$errors->get('password')" class="mt-1" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div>
+            <label for="password_confirmation" class="form-label text-forest-950">Ulangi Kata Sandi Baru</label>
+            <input id="password_confirmation"
+                   class="form-input focus:border-emerald-600 focus:ring-emerald-500/20"
+                   type="password"
+                   name="password_confirmation"
+                   required
+                   autocomplete="new-password"
+                   placeholder="Ketik ulang kata sandi baru" />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
+        <div class="pt-2">
+            <button type="submit" class="w-full btn-primary py-4 rounded-2xl text-base font-extrabold shadow-lg shadow-forest-800/25 hover:shadow-xl hover:scale-[1.01] transition-all">
+                Simpan Kata Sandi Baru &rarr;
+            </button>
         </div>
     </form>
 </x-guest-layout>

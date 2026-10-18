@@ -35,34 +35,38 @@
 @endphp
 
 <div class="space-y-8 animate-fade-in">
-    {{-- 30% Green Sanctuary Welcome Banner (Inspired by Poster Bottom Green Section) --}}
-    <div class="card-forest relative overflow-hidden p-7 sm:p-9">
+    {{-- Modern Energetic Green Welcome Banner --}}
+    <div class="relative overflow-hidden p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-br from-forest-950 via-forest-900 to-emerald-950 text-white border-2 border-emerald-500/20 shadow-2xl shadow-forest-950/20">
+        {{-- Decorative Wavy Glow Blobs --}}
+        <div class="absolute -top-16 -left-16 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-lime-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div class="space-y-3 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-emerald-200 text-xs font-bold uppercase tracking-wider">
-                    <span class="w-2 h-2 rounded-full bg-lime-300 animate-pulse"></span>
-                    <span>Ruang Konseling & Pertumbuhan Diri</span>
+            <div class="space-y-3.5 max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-200 text-xs font-black uppercase tracking-wider">
+                    <span class="w-2.5 h-2.5 rounded-full bg-lime-400 animate-pulse"></span>
+                    <span>Ruang Konseling & Pertumbuhan Diri Remaja</span>
                 </div>
-                <h2 class="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight">
-                    Selamat Datang, {{ $user->name }}
+                <h2 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight leading-tight">
+                    Selamat Datang, {{ $user->name }}! 🌱
                 </h2>
-                <p class="text-xs sm:text-sm text-emerald-100 leading-relaxed font-light">
+                <p class="text-xs sm:text-sm text-emerald-100 leading-relaxed font-normal">
                     Setiap tunas memiliki waktunya sendiri untuk bertumbuh. Di ruang ini, ceritamu didengar dengan penuh empati, aman, dan tanpa penghakiman.
                 </p>
-                <div class="pt-2">
-                    <span class="inline-flex items-center gap-2 text-xs italic text-lime-200 bg-white/10 px-3.5 py-1.5 rounded-2xl border border-white/15">
-                        &ldquo;Urip Iku Urup — Hidupmu bermakna dan kamu tidak sendirian.&rdquo;
+                <div class="pt-1">
+                    <span class="inline-flex items-center gap-2 text-xs italic text-lime-200 bg-white/10 px-4 py-2 rounded-2xl border border-white/15">
+                        &ldquo;Urip Iku Urup — Hidupmu bermakna dan kamu tidak pernah sendirian.&rdquo;
                     </span>
                 </div>
             </div>
 
             {{-- Progress Gauge --}}
-            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 border border-white/15 flex flex-col items-center justify-center text-center flex-shrink-0">
-                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-200 mb-1">Perjalanan Layanan</span>
-                <div class="text-3xl font-black text-white">
-                    {{ $completedCount }}<span class="text-base text-emerald-300 font-sans">/8</span>
+            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 flex flex-col items-center justify-center text-center flex-shrink-0 shadow-lg">
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-200 mb-1">Perjalanan Layanan</span>
+                <div class="text-4xl font-display font-black text-white">
+                    {{ $completedCount }}<span class="text-lg text-emerald-300 font-sans">/8</span>
                 </div>
-                <span class="text-xs font-bold text-lime-300 mt-1">{{ $progressPercent }}% Selesai</span>
+                <span class="text-xs font-black text-lime-300 mt-1 bg-forest-900/60 px-3 py-1 rounded-full border border-lime-300/30">{{ $progressPercent }}% Selesai</span>
             </div>
         </div>
     </div>

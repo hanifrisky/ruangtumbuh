@@ -35,24 +35,43 @@
                 </div>
 
                 @if($preTest)
-                    <div class="space-y-4">
                         <div class="p-5 bg-forest-50/50 border border-forest-200 rounded-2xl text-center">
                             <span class="text-[10px] font-black text-slate-500 block uppercase tracking-widest">Skor Total Awal</span>
-                            <span class="text-4xl font-black text-forest-950 block mt-1">{{ $preTest->total_score }} Poin</span>
-                            <span class="text-xs text-slate-600 font-medium block mt-2">Well-Being: <strong class="text-forest-900">{{ $preTest->well_being_score ?? '-' }}</strong> | Ide Bunuh Diri: <strong class="text-forest-900">{{ $preTest->suicide_ideation_score ?? '-' }}</strong></span>
-                            <span class="text-[11px] text-slate-400 font-bold block mt-1">Selesai: {{ $preTest->completed_at->format('d M Y H:i') }} WIB</span>
+                            <span class="text-4xl font-black text-forest-950 block mt-1">{{ $preTest->well_being_score ?? $preTest->total_score }} Poin</span>
+                            <div class="flex items-center justify-center gap-2 mt-2">
+                                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold bg-forest-100 text-forest-900 border border-forest-300">
+                                    WB: {{ $preTest->well_being_category }} ({{ $preTest->well_being_score ?? '-' }}/125)
+                                </span>
+                                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold {{ $preTest->is_crisis ? 'bg-rose-100 text-rose-900 border border-rose-300' : 'bg-slate-100 text-slate-800' }}">
+                                    Ide Bunuh Diri: {{ $preTest->suicide_category }} ({{ $preTest->suicide_ideation_score ?? '-' }}/60)
+                                </span>
+                            </div>
+                            @if($preTest->is_crisis)
+                                <div class="mt-2 text-xs font-black text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-1.5">
+                                    ⚠ PERINGATAN KRISIS: Butir inti / skor risiko tinggi!
+                                </div>
+                            @elseif($preTest->is_selective_priority)
+                                <div class="mt-2 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-1.5">
+                                    ⚡ Prioritas Pencegahan Selektif (Skor WB &le; 80)
+                                </div>
+                            @endif
+                            <span class="text-[11px] text-slate-400 font-bold block mt-2">Selesai: {{ $preTest->completed_at ? $preTest->completed_at->format('d M Y H:i') : '-' }} WIB</span>
                         </div>
                         <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
                             <span class="text-[10px] font-black text-forest-800 uppercase tracking-widest block mb-1">Interpretasi Hasil</span>
-                            <p class="text-xs text-slate-700 leading-relaxed font-medium">{{ $preTest->interpretation->description ?? 'Tidak ditemukan deskripsi.' }}</p>
+                            <p class="text-xs text-slate-700 leading-relaxed font-medium">{{ $preTest->interpretation->description ?? $preTest->well_being_interpretation_text }}</p>
                         </div>
-                        <div class="pt-2 border-t border-slate-100 flex justify-end">
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                            <a href="{{ route('konselor.konseli.wellbeing.pdf', [$user, 'pre_test']) }}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-forest-800 bg-forest-50 hover:bg-forest-100 rounded-xl border border-forest-200 transition-colors uppercase tracking-wider">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Unduh PDF
+                            </a>
                             <form action="{{ route('konselor.konseli.wellbeing.reset', [$user, 'pre_test']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin mereset hasil Awal Konseling ini? Konseli harus mengisi ulang dari awal.')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl border border-rose-200 transition-colors uppercase tracking-wider">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                    Reset Awal Konseling
+                                    Reset
                                 </button>
                             </form>
                         </div>
@@ -74,24 +93,43 @@
                 </div>
 
                 @if($postTest)
-                    <div class="space-y-4">
                         <div class="p-5 bg-sky-50/50 border border-sky-200 rounded-2xl text-center">
                             <span class="text-[10px] font-black text-slate-500 block uppercase tracking-widest">Skor Total Sesudah</span>
-                            <span class="text-4xl font-black text-sky-950 block mt-1">{{ $postTest->total_score }} Poin</span>
-                            <span class="text-xs text-slate-600 font-medium block mt-2">Well-Being: <strong class="text-sky-900">{{ $postTest->well_being_score ?? '-' }}</strong> | Ide Bunuh Diri: <strong class="text-sky-900">{{ $postTest->suicide_ideation_score ?? '-' }}</strong></span>
-                            <span class="text-[11px] text-slate-400 font-bold block mt-1">Selesai: {{ $postTest->completed_at->format('d M Y H:i') }} WIB</span>
+                            <span class="text-4xl font-black text-sky-950 block mt-1">{{ $postTest->well_being_score ?? $postTest->total_score }} Poin</span>
+                            <div class="flex items-center justify-center gap-2 mt-2">
+                                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold bg-sky-100 text-sky-900 border border-sky-300">
+                                    WB: {{ $postTest->well_being_category }} ({{ $postTest->well_being_score ?? '-' }}/125)
+                                </span>
+                                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold {{ $postTest->is_crisis ? 'bg-rose-100 text-rose-900 border border-rose-300' : 'bg-slate-100 text-slate-800' }}">
+                                    Ide Bunuh Diri: {{ $postTest->suicide_category }} ({{ $postTest->suicide_ideation_score ?? '-' }}/60)
+                                </span>
+                            </div>
+                            @if($postTest->is_crisis)
+                                <div class="mt-2 text-xs font-black text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-1.5">
+                                    ⚠ PERINGATAN KRISIS: Butir inti / skor risiko tinggi!
+                                </div>
+                            @elseif($postTest->is_selective_priority)
+                                <div class="mt-2 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-1.5">
+                                    ⚡ Prioritas Pencegahan Selektif (Skor WB &le; 80)
+                                </div>
+                            @endif
+                            <span class="text-[11px] text-slate-400 font-bold block mt-2">Selesai: {{ $postTest->completed_at ? $postTest->completed_at->format('d M Y H:i') : '-' }} WIB</span>
                         </div>
                         <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
                             <span class="text-[10px] font-black text-sky-800 uppercase tracking-widest block mb-1">Interpretasi Hasil</span>
-                            <p class="text-xs text-slate-700 leading-relaxed font-medium">{{ $postTest->interpretation->description ?? 'Tidak ditemukan deskripsi.' }}</p>
+                            <p class="text-xs text-slate-700 leading-relaxed font-medium">{{ $postTest->interpretation->description ?? $postTest->well_being_interpretation_text }}</p>
                         </div>
-                        <div class="pt-2 border-t border-slate-100 flex justify-end">
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                            <a href="{{ route('konselor.konseli.wellbeing.pdf', [$user, 'post_test']) }}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-sky-800 bg-sky-50 hover:bg-sky-100 rounded-xl border border-sky-200 transition-colors uppercase tracking-wider">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Unduh PDF
+                            </a>
                             <form action="{{ route('konselor.konseli.wellbeing.reset', [$user, 'post_test']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin mereset hasil Post-Test ini? Konseli harus mengisi ulang dari awal.')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl border border-rose-200 transition-colors uppercase tracking-wider">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                    Reset Post-Test
+                                    Reset
                                 </button>
                             </form>
                         </div>

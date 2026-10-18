@@ -1,11 +1,12 @@
 <x-guest-layout>
-    <div class="mb-6">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest-50 border border-forest-200 text-forest-800 text-[11px] font-extrabold uppercase tracking-wider mb-2">
-            Langkah 2 • Akses Ruang Pribadi
-        </span>
-        <h2 class="font-display text-2xl sm:text-3xl font-bold text-ink-900">Selamat Datang Kembali</h2>
-        <p class="text-xs sm:text-sm text-ink-500 mt-1 leading-relaxed">
-            Masuk dengan <strong>Email</strong> atau <strong>Username</strong> akun Ruang Tumbuh kamu untuk melanjutkan sesi pendampingan.
+    <div class="mb-6 space-y-2">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-forest-900 border border-emerald-300 text-xs font-black shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+            <span>Langkah 2 • Akses Ruang Pribadi</span>
+        </div>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-forest-950 tracking-tight">Selamat Datang Kembali!</h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+            Masuk dengan <strong>Email</strong> atau <strong>Username</strong> akun Ruang Tumbuh kamu untuk melanjutkan sesi konseling dan refleksi.
         </p>
     </div>
 
@@ -17,7 +18,7 @@
 
         <!-- Email Address or Username -->
         <div>
-            <label for="email" class="form-label">Email atau Username</label>
+            <label for="email" class="form-label text-forest-950">Email atau Username</label>
             <input id="email"
                    type="text"
                    name="email"
@@ -25,15 +26,15 @@
                    required
                    autofocus
                    autocomplete="username"
-                   class="form-input"
-                   placeholder="Contoh: emailkamu@example.com atau username" />
+                   class="form-input focus:border-emerald-600 focus:ring-emerald-500/20"
+                   placeholder="Contoh: siswa@example.com atau nama_user" />
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
         <!-- Password -->
         <div>
             <div class="flex items-center justify-between mb-1.5">
-                <label for="password" class="form-label mb-0">Kata Sandi (Password)</label>
+                <label for="password" class="form-label text-forest-950 mb-0">Kata Sandi</label>
             </div>
             <div class="relative" x-data="{ show: false }">
                 <input id="password"
@@ -41,12 +42,12 @@
                        name="password"
                        required
                        autocomplete="current-password"
-                       class="form-input pr-12"
+                       class="form-input pr-12 focus:border-emerald-600 focus:ring-emerald-500/20"
                        placeholder="••••••••" />
                 <button type="button"
                         @click="show = !show"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-forest-800 transition-colors focus:outline-none p-1.5"
-                        title="Tampilkan/Sembunyikan Password">
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-forest-800 transition-colors focus:outline-none p-1.5"
+                        title="Tampilkan/Sembunyikan Kata Sandi">
                     <svg x-show="!show" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -65,26 +66,26 @@
                 <input id="remember_me"
                        type="checkbox"
                        name="remember"
-                       class="rounded-md border-sand-300 text-forest-800 focus:ring-sage-500 w-4 h-4">
-                <span class="ms-2 text-xs text-ink-600 font-semibold">Ingat saya di perangkat ini</span>
+                       class="rounded-lg border-emerald-300 text-emerald-700 focus:ring-emerald-500 w-4 h-4">
+                <span class="ms-2 text-xs text-slate-700 font-bold">Ingat saya di perangkat ini</span>
             </label>
         </div>
 
-        <div class="p-3.5 rounded-2xl bg-forest-50/80 border border-forest-200/80 flex items-center gap-2.5 text-xs text-forest-900">
-            <svg class="w-4 h-4 text-forest-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            <span>Data asesmen dan percakapanmu <strong>dijaga rahasia sepenuhnya</strong>.</span>
+        <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200/90 flex items-center gap-2.5 text-xs text-forest-950 font-medium">
+            <span class="text-base flex-shrink-0">🔒</span>
+            <span>Data asesmen dan riwayat konselingmu <strong>dijamin 100% rahasia & aman</strong>.</span>
         </div>
 
         <div class="pt-2">
-            <button type="submit" class="w-full btn-primary py-3.5 text-sm font-extrabold uppercase tracking-wider">
-                Masuk ke Ruang Tumbuh
+            <button type="submit" class="w-full btn-primary py-4 rounded-2xl text-base font-extrabold shadow-lg shadow-forest-800/25 hover:shadow-xl hover:scale-[1.01] transition-all">
+                Masuk ke Ruang Tumbuh &rarr;
             </button>
         </div>
 
-        <div class="text-center mt-5 pt-4 border-t border-sand-200">
-            <p class="text-xs text-ink-500">
+        <div class="text-center mt-5 pt-4 border-t border-slate-100">
+            <p class="text-xs text-slate-600 font-medium">
                 Belum memiliki akun?
-                <a href="{{ route('register') }}" class="text-forest-800 hover:text-terra-600 font-extrabold transition-colors ml-1">
+                <a href="{{ route('register') }}" class="text-emerald-700 hover:text-forest-900 font-extrabold transition-colors ml-1 underline decoration-2 decoration-emerald-400">
                     Daftar Akun Siswa Baru &rarr;
                 </a>
             </p>

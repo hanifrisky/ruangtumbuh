@@ -126,7 +126,6 @@ class WellbeingController extends Controller
             return back()->with('error', 'Harap jawab semua pernyataan instrumen terlebih dahulu.');
         }
 
-        $totalScore = $answer->details->sum('score');
         $wellBeingScore = $answer->details
             ->filter(fn ($d) => ($d->question->category ?? 'well_being') === 'well_being')
             ->sum('score');
@@ -134,14 +133,14 @@ class WellbeingController extends Controller
             ->filter(fn ($d) => ($d->question->category ?? '') === 'suicide_ideation')
             ->sum('score');
 
-        // Find matching interpretation
-        $interpretation = Interpretation::where('min_score', '<=', $totalScore)
-            ->where('max_score', '>=', $totalScore)
+        // Cari interpretasi berdasarkan skor Well-Being (25 - 125)
+        $interpretation = Interpretation::where('min_score', '<=', $wellBeingScore)
+            ->where('max_score', '>=', $wellBeingScore)
             ->first();
 
         $answer->update([
             'status' => 'completed',
-            'total_score' => $totalScore,
+            'total_score' => $wellBeingScore,
             'well_being_score' => $wellBeingScore,
             'suicide_ideation_score' => $suicideIdeationScore,
             'interpretation_id' => $interpretation?->id,
@@ -160,7 +159,7 @@ class WellbeingController extends Controller
         $answer = WellbeingAnswer::where('konseli_id', $user->id)
             ->where('type', $type)
             ->where('status', 'completed')
-            ->with(['details.question', 'details.selectedOption', 'interpretation'])
+            ->with(['details.question', 'details.selectedOption', 'interpretation', 'konseli.selectedCounselor.counselorProfile'])
             ->firstOrFail();
 
         return view('konseli.wellbeing.result', compact('type', 'answer'));
@@ -174,15 +173,14 @@ class WellbeingController extends Controller
         $answer = WellbeingAnswer::where('konseli_id', $user->id)
             ->where('type', $type)
             ->where('status', 'completed')
-            ->with(['details.question', 'details.selectedOption', 'interpretation'])
+            ->with(['details.question', 'details.selectedOption', 'interpretation', 'konseli.selectedCounselor.counselorProfile'])
             ->firstOrFail();
 
         $labelType = $type === 'pre_test' ? 'awal_konseling' : 'sesudah_konseling';
-        $filename = "instrumen_wellbeing_ide_bunuh_diri_{$labelType}_{$user->id}.pdf";
+        $filename = "laporan_asesmen_psikologis_{$labelType}_{$user->id}.pdf";
 
-        $maxPossibleScore = Interpretation::max('max_score') ?? 150;
-
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('konseli.wellbeing.pdf', compact('answer', 'type', 'maxPossibleScore'));
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('konseli.wellbeing.pdf', compact('answer', 'type', 'user'))
+            ->setPaper('a4', 'portrait');
 
         return $pdf->download($filename);
     }
