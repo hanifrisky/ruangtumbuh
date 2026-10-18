@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>document.documentElement.classList.add('js')</script>
     <title>{{ config('app.name', 'Ruang Tumbuh') }} - @yield('title', 'Ruang Bertumbuh')</title>
     <meta name="description" content="@yield('description', 'Konstruksi Model Teoritis Konseling Online Bermuatan Nilai Kearifan Lokal untuk Meningkatkan Well-Being Remaja dengan Ide Bunuh Diri.')">
     <link rel="icon" href="{{ asset('image/logo-mark.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
@@ -19,10 +20,10 @@
     {{-- ======================================================================
          LAPIS KESELAMATAN GLOBAL: FLOATING CRISIS & EMERGENCY PILL
          ====================================================================== --}}
-    <div class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2 print:hidden">
+    <div class="hidden sm:flex fixed bottom-6 right-6 z-40 items-center gap-2 print:hidden">
         <button type="button"
                 @click="crisisModalOpen = true"
-                class="group inline-flex items-center gap-2.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-black tracking-wide shadow-[0_10px_25px_-4px_rgba(225,29,72,0.4)] hover:shadow-[0_14px_30px_-4px_rgba(225,29,72,0.55)] transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
+                class="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold tracking-wide transition-colors duration-200 active:scale-95 focus:outline-none focus:ring-4 focus:ring-rose-400/40"
                 aria-label="Bantuan Krisis & Darurat 24 Jam">
             <span class="relative flex h-2.5 w-2.5">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-200 opacity-75"></span>
@@ -38,9 +39,9 @@
          class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-forest-950/70 backdrop-blur-sm animate-fade-in print:hidden"
          @keydown.escape.window="crisisModalOpen = false">
         <div @click.outside="crisisModalOpen = false"
-             class="w-full max-w-lg bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden animate-slide-up">
-            {{-- Header in Deep Green (30% Green) --}}
-            <div class="p-6 bg-gradient-to-br from-forest-900 via-forest-850 to-forest-800 text-white relative">
+             class="w-full max-w-lg bg-white rounded-3xl overflow-hidden animate-slide-up">
+            {{-- Header in Flat Deep Green (30% Green) --}}
+            <div class="p-6 bg-forest-950 text-white relative">
                 <div class="flex items-start justify-between gap-4">
                     <div>
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-emerald-200 text-[11px] font-black uppercase tracking-wider mb-2">

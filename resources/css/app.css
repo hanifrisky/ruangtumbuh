@@ -4,143 +4,114 @@
 
 @layer base {
     :root {
-        /* 60% Dominant: Pure Crisp White Canvas */
+        /* 60% Dominant: Pure Crisp Paper White Canvas */
         --rt-bg-canvas: #FFFFFF;
         --rt-bg-soft: #F8FAFC;
         --rt-surface: #FFFFFF;
-        --rt-border: #E2E8F0;
 
-        /* 30% Secondary: Fresh Leaf & Deep Forest Green */
+        /* 30% Secondary: Flat Deep Forest & Leaf Green */
         --rt-forest-950: #022C22;
         --rt-forest-900: #064E3B;
         --rt-forest-800: #065F46;
         --rt-forest-700: #047857;
-        --rt-green-600: #16A34A;
-        --rt-green-500: #22C55E;
-        --rt-green-100: #DCFCE7;
-        --rt-green-50: #F0FDF4;
 
-        /* 10% Accent: Crisp Sky & Cyan Blue */
+        /* 10% Accent: Pure Sky Blue */
+        --rt-sky-700: #0369A1;
         --rt-sky-600: #0284C7;
         --rt-sky-500: #0EA5E9;
-        --rt-sky-400: #38BDF8;
         --rt-sky-100: #E0F2FE;
-        --rt-sky-50: #F0F9FF;
 
-        /* Poster Highlight: Lime / Spring Accent */
-        --rt-lime-500: #84CC16;
-        --rt-lime-200: #D9F99D;
-        --rt-lime-100: #ECFCCB;
+        /* Poster Highlight: Pure Solid Lime */
+        --rt-lime-400: #A3E635;
+        --rt-lime-300: #BEF264;
 
         /* High Contrast Charcoal Ink */
+        --rt-ink-950: #0A0F1D;
         --rt-ink-900: #0F172A;
         --rt-ink-800: #1E293B;
         --rt-ink-700: #334155;
-        --rt-ink-600: #475569;
-        --rt-ink-500: #64748B;
-        --rt-ink-400: #94A3B8;
 
-        /* Emergency Crisis */
-        --rt-crisis-600: #E11D48;
+        /* Motion Tokens */
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+        --t-press: 140ms;
+        --t-hover: 180ms;
+        --t-reveal: 700ms;
     }
 
     body {
         background-color: var(--rt-bg-canvas);
         color: var(--rt-ink-900);
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
     h1, h2, h3, h4, .font-display {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Archivo', 'Plus Jakarta Sans', sans-serif;
         letter-spacing: -0.025em;
+        line-height: 1.05;
     }
 }
 
 @layer components {
-    /* 30% Green Button */
+    /* Solid Flat Buttons */
     .btn-primary {
-        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-forest-700 hover:bg-forest-800 text-white font-bold text-sm shadow-md shadow-forest-800/15 hover:shadow-lg hover:shadow-forest-800/25 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-forest-500/20 disabled:opacity-50 disabled:pointer-events-none;
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-base transition-transform transition-colors duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-forest-600/30;
     }
 
-    /* 10% Sky Blue Accent Button */
-    .btn-sky, .btn-terra {
-        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow-md shadow-sky-600/20 hover:shadow-lg hover:shadow-sky-600/30 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-sky-500/20 disabled:opacity-50 disabled:pointer-events-none;
-    }
-
-    /* 60% Crisp White Outline / Secondary Button */
     .btn-secondary {
-        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-slate-50 text-ink-800 font-bold text-sm border-2 border-slate-200 hover:border-slate-300 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-slate-400/15 disabled:opacity-50 disabled:pointer-events-none shadow-sm;
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-ink-900 font-bold text-base transition-transform transition-colors duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-slate-300/40;
     }
 
-    .btn-success {
-        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-forest-600 hover:bg-forest-700 text-white font-bold text-sm shadow-md shadow-forest-600/20 transition-all duration-200 active:scale-[0.98];
+    .btn-lime {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-lime-300 hover:bg-lime-400 text-forest-950 font-black text-base transition-transform transition-colors duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-lime-400/40;
     }
 
-    /* Cards */
-    .card {
-        @apply bg-white rounded-3xl border border-slate-200/90 shadow-sm transition-all duration-200;
-    }
-    .card-forest {
-        @apply bg-gradient-to-br from-forest-950 via-forest-900 to-forest-800 text-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-forest-950/20;
-    }
-    .card-sand {
-        @apply bg-slate-50/80 border border-slate-200/90 rounded-3xl;
-    }
-    .card-sky {
-        @apply bg-sky-50/70 border border-sky-200 rounded-3xl text-sky-950;
-    }
-    .card-program-badge {
-        @apply inline-block px-3 py-1 rounded-md bg-lime-300 text-forest-950 font-black text-xs uppercase tracking-wider shadow-sm;
+    .btn-sky, .btn-terra {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-base transition-transform transition-colors duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-sky-500/30;
     }
 
     /* Tactile Form Inputs */
     .form-input {
-        @apply w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-2xl text-sm text-ink-900 placeholder-ink-400 focus:bg-white focus:ring-4 focus:ring-forest-500/15 focus:border-forest-600 outline-none transition-all duration-200;
+        @apply w-full px-4 py-3.5 bg-white border-2 border-slate-300 rounded-2xl text-base text-ink-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-forest-600/20 focus:border-forest-700 outline-none transition-colors duration-200;
     }
     .form-label {
-        @apply block text-xs sm:text-sm font-bold text-ink-800 mb-1.5 tracking-tight;
-    }
-    .form-error {
-        @apply text-xs font-semibold text-rose-600 mt-1;
+        @apply block text-sm font-bold text-ink-900 mb-2;
     }
 
     /* Likert Scale Cards */
     .likert-option {
-        @apply flex items-center justify-between gap-4 p-4 min-h-[54px] rounded-2xl border-2 border-slate-200 bg-white hover:border-forest-600 hover:bg-forest-50/50 cursor-pointer transition-all duration-200 select-none;
+        @apply flex items-center justify-between gap-4 p-4 min-h-[58px] rounded-2xl bg-slate-100 hover:bg-forest-50 text-ink-900 hover:text-forest-900 cursor-pointer transition-colors duration-200 select-none;
     }
     .likert-option-active {
-        @apply border-forest-700 bg-forest-50 ring-4 ring-forest-700/15 shadow-sm;
+        @apply bg-forest-100 text-forest-950 ring-2 ring-forest-800;
     }
 
-    /* Sidebar Navigation Rail Items */
+    /* Navigation */
     .nav-rail-item, .sidebar-light-item {
-        @apply flex items-center gap-3 px-4 py-3 text-sm font-bold text-ink-600 rounded-2xl hover:bg-forest-50 hover:text-forest-800 transition-all duration-200;
+        @apply flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 rounded-2xl hover:bg-forest-50 hover:text-forest-900 transition-colors duration-200;
     }
     .nav-rail-item.active, .sidebar-light-item.active {
-        @apply bg-forest-800 text-white shadow-md shadow-forest-900/15;
+        @apply bg-forest-800 text-white;
     }
 }
 
-@layer utilities {
-    .safe-bottom {
-        padding-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    .animate-fade-in {
-        animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .animate-slide-up {
-        animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+/* Motion Layer (Staggered Entrance Reveals & Fallback) */
+@media (prefers-reduced-motion: no-preference) {
+    .js [data-rise] {
+        opacity: 0;
+        transform: translateY(18px);
+        animation: riseAnim var(--t-reveal) var(--ease-out) forwards;
+        animation-delay: calc(var(--i, 0) * 80ms + 100ms);
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes riseAnim {
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
