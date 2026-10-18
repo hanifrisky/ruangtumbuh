@@ -11,7 +11,9 @@ return new class extends Migration
     public function up(): void
     {
         // Ubah ENUM menjadi VARCHAR agar lebih fleksibel menampung 'youtube'
-        DB::statement("ALTER TABLE lesson_sections MODIFY COLUMN type VARCHAR(50) NOT NULL");
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("ALTER TABLE lesson_sections MODIFY COLUMN type VARCHAR(50) NOT NULL");
+        }
     }
 
     /**

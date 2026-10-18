@@ -91,8 +91,8 @@
                     Platform Konseling Online Terpadu
                 </span>
                 <h1 class="font-sans text-4xl sm:text-5xl md:text-6xl font-black text-forest-900 tracking-tight leading-[1.08]">
-                    TUMBUH TANGGUH,<br>
-                    <span class="text-forest-700">RAYAKAN KEHIDUPAN</span>
+                    RUANG<br>
+                    <span class="text-forest-700">TUMBUH</span>
                 </h1>
                 <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl pt-2">
                     Ruang aman bagi remaja Indonesia untuk meredakan beban batin, merekonstruksi keyakinan diri melalui pendekatan <strong>REBT</strong>, serta menemukan kembali harapan masa depan berlandaskan <strong>kearifan lokal Nusantara</strong>.
@@ -108,25 +108,23 @@
                 </div>
             </div>
 
-            {{-- Graphic Ribbon & Miniature Life World Illustration Motif --}}
+            {{-- Gambar Ilustrasi Anak yang Tersenyum --}}
             <div class="lg:col-span-4 relative flex items-center justify-center">
-                <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-tr from-forest-100 via-sky-50 to-emerald-50 border border-forest-200/80 flex items-center justify-center relative p-6 shadow-inner">
-                    <div class="text-center space-y-2">
-                        <div class="w-16 h-16 rounded-2xl bg-forest-700 text-white flex items-center justify-center mx-auto shadow-md">
-                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                        </div>
-                        <h4 class="font-black text-forest-950 text-base">Ruang Tumbuh Remaja</h4>
-                        <p class="text-xs text-forest-800 font-medium leading-relaxed">
-                            12 Konselor Ahli &bull; Privasi Dijamin &bull; Asesmen Berstandar Ilmiah
-                        </p>
-                        <span class="inline-block mt-2 px-3 py-1 bg-white text-sky-700 text-[11px] font-bold rounded-full border border-sky-200 shadow-sm">
-                            100% Layanan Bebas Biaya
-                        </span>
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+                    {{-- Soft ambient glow background --}}
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-forest-100/80 via-sky-100/60 to-emerald-100/80 filter blur-xl -z-10 transform scale-95"></div>
+                    
+                    {{-- Illustration Container --}}
+                    <div class="w-full h-full rounded-3xl overflow-hidden bg-white border-2 border-forest-200/90 shadow-xl p-3 sm:p-4 flex items-center justify-center group hover:scale-[1.02] transition-transform duration-300">
+                        <img src="{{ asset('image/smiling-child.png') }}" 
+                             alt="Ilustrasi Anak Remaja Tersenyum Bahagia - Ruang Tumbuh" 
+                             class="w-full h-full object-contain rounded-2xl transform transition-transform duration-500 group-hover:scale-105"
+                             loading="eager" />
                     </div>
 
                     {{-- Floating Organic Leaf Accents --}}
-                    <span class="absolute -top-2 right-4 text-2xl animate-bounce">🌱</span>
-                    <span class="absolute bottom-4 -left-2 text-2xl">🍃</span>
+                    <span class="absolute -top-3 -right-2 text-2xl animate-bounce select-none">🌱</span>
+                    <span class="absolute -bottom-2 -left-2 text-2xl select-none">🍃</span>
                 </div>
             </div>
         </div>
