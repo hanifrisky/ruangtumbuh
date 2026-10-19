@@ -69,7 +69,7 @@ def add_callout(doc, text, title="💡 CATATAN PENTING / TIPS", border_color="02
     run_title = p.add_run(f"{title}\n")
     run_title.bold = True
     run_title.font.size = Pt(9.5)
-    run_title.font.color.rgb = RGBColor(2, 132, 199)
+    run_title.font.color.rgb = RGBColor(2, 132, 199) if border_color == "0284C7" else RGBColor(185, 28, 28) if border_color in ["E11D48", "DC2626"] else RGBColor(13, 148, 136)
     run_text = p.add_run(text)
     run_text.font.size = Pt(9)
     run_text.font.color.rgb = RGBColor(51, 65, 85)
@@ -206,7 +206,7 @@ def add_paragraph(doc, text):
 # 1. GENERATE DOKUMEN ADMIN
 # ==============================================================================
 def generate_admin_doc():
-    print("Membangun Dokumen: Panduan_Pengguna_Ruang_Tumbuh_Admin.docx...")
+    print("Membangun Dokumen Baru: Panduan_Pengguna_Ruang_Tumbuh_Admin.docx...")
     doc = setup_document("Buku Panduan Administrator")
     add_cover(
         doc,
@@ -217,39 +217,39 @@ def generate_admin_doc():
 
     # 1. Judul & Versi
     add_heading_1(doc, "1. Informasi Modul & Akses Sistem")
-    add_paragraph(doc, "Dokumen ini merupakan panduan teknis resmi bagi Pengelola Sistem (Administrator) di platform Ruang Tumbuh. Melalui modul ini, Administrator memegang wewenang penuh dalam mengelola master data pengguna, profil konselor bimbingan konseling, instrumen asesmen psikologis (skala resiliensi dan deteksi risiko), modul self-help berbasis kearifan budaya Nusantara, serta modul edukasi materi.")
+    add_paragraph(doc, "Dokumen ini merupakan panduan teknis operasional bagi Administrator sistem platform Ruang Tumbuh. Melalui modul ini, Administrator memiliki wewenang penuh dalam mengelola pangkalan data pengguna, daftar konselor bimbingan konseling, instrumen asesmen psikologis (Psychological Well-Being 25 butir & Deteksi Risiko Ide Bunuh Diri 12 butir), modul self-help berbasis kearifan budaya Nusantara, serta modul edukasi materi.")
     
     headers_info = ["Komponen", "Spesifikasi / Keterangan"]
     data_info = [
         ["Nama Aplikasi", "Ruang Tumbuh"],
         ["Domain Akses", "https://ruangtumbuh.appocket.id"],
         ["Role Sasaran", "Administrator Sistem (Admin)"],
-        ["Modul Utama", "Manajemen User, Konselor, Asesmen, Self-Help, & Lessons"],
+        ["Modul Utama", "Manajemen User, Konselor, Asesmen Dua Bagian, Self-Help Budaya, & Pembelajaran"],
         ["Periode Pembaruan", "Oktober 2026"],
     ]
     add_table_data(doc, headers_info, data_info, [Inches(2.0), Inches(4.4)], theme_color="0F172A")
 
     # 2. Pendahuluan Ringan
     add_heading_1(doc, "2. Pendahuluan Ringan")
-    add_paragraph(doc, "Ruang Tumbuh adalah platform konseling daring dan pengembangan resiliensi berbasis kearifan lokal yang dirancang khusus untuk mendampingi remaja dan siswa. Peran Administrator adalah memastikan operasional platform berjalan dengan lancar, data instrumen psikologis valid, profil para konselor tersaji dengan akurat, dan materi intervensi budaya nusantara selalu mutakhir.")
-    add_paragraph(doc, "Tanggung jawab utama seorang Administrator meliputi:\n"
-                  "1. Pengelolaan Akun Pengguna: Mendaftarkan konselor baru, memvalidasi akun siswa (konseli), dan mengelola keamanan kredensial akun.\n"
-                  "2. Konfigurasi Konselor: Menata nomor urut konselor, deskripsi keahlian, nomor kontak WhatsApp, dan foto profil.\n"
-                  "3. Pengelolaan Instrumen: Memelihara butir-butir pertanyaan asesmen resiliensi, skala pilihan ganda, dan rentang interpretasi skor.\n"
-                  "4. Pengayaan Kearifan Budaya: Menambah dan memperbarui suku budaya, materi cerita inspiratif, serta pertanyaan refleksi SFBC (Solution-Focused Brief Counseling).")
-    
-    add_callout(doc, "Hak akses Administrator bersifat rahasia dan memiliki hak kendali penuh atas basis data. Pastikan kredensial akun disimpan dengan aman dan selalu lakukan proses logout setelah menyelesaikan sesi kerja.", title="⚠️ KEAMANAN HAK AKSES ADMINISTRATOR", border_color="E11D48", bg_color="FFF1F2")
+    add_paragraph(doc, "Ruang Tumbuh adalah platform bimbingan konseling online dan penguatan resiliensi remaja yang mengintegrasikan pendekatan klinis modern dengan nilai-nilai kearifan lokal budaya Indonesia. Sebagai Administrator, Anda bertindak sebagai pengendali utama tata kelola data sistem.")
+    add_paragraph(doc, "Fokus tugas Administrator mencakup:\n"
+                  "1. Pengelolaan Akun Pengguna: Memverifikasi akun siswa (konseli), mendaftarkan konselor baru, dan mengatur hak akses akun.\n"
+                  "2. Profil & Urutan Konselor: Menata nomor urut konselor, deskripsi keahlian, nomor WhatsApp, serta foto profil.\n"
+                  "3. Pengelolaan Instrumen Psikologis (2 Bagian Baku):\n"
+                  "   • Bagian 1: Psychological Well-Being Carol D. Ryff (25 butir, rentang 25–125 poin, titik potong skrining <= 80).\n"
+                  "   • Bagian 2: Identifikasi Diri / Ide Bunuh Diri (12 butir, rentang 12–60 poin, ambang krisis >= 41).\n"
+                  "4. Pengayaan Kearifan Budaya: Mengelola suku-suku nusantara, materi narasi resiliensi SFBC, dan pertanyaan refleksi mandiri.")
+
+    add_callout(doc, "Akun Administrator memiliki hak istimewa tingkat tinggi. Jaga kerahasiaan kata sandi dan hindari login dari komputer umum tanpa pengamanan.", title="⚠️ KEAMANAN HAK AKSES ADMINISTRATOR", border_color="E11D48", bg_color="FFF1F2")
 
     # 3. Prasyarat (Prerequisites)
     add_heading_1(doc, "3. Prasyarat (Prerequisites)")
-    add_paragraph(doc, "Sebelum memulai operasional pada panel Administrator, pastikan telah memenuhi prasyarat berikut:")
     prereq_headers = ["Kebutuhan", "Spesifikasi Minimal yang Disarankan"]
     prereq_data = [
-        ["Akun & Hak Akses", "Akun terdaftar dengan role 'admin' (kredensial diberikan oleh Superadmin)."],
-        ["Perangkat Komputer", "Laptop atau PC desktop dengan resolusi layar minimal 1280 x 720 piksel."],
-        ["Peramban Web (Browser)", "Google Chrome v100+, Microsoft Edge v100+, Mozilla Firefox, atau Safari."],
-        ["Koneksi Internet", "Koneksi stabil minimal 2 Mbps untuk kelancaran unggah berkas dan olah data."],
-        ["Perangkat Lunak Tambahan", "Aplikasi pengolah gambar sederhana (jika ingin mengunggah foto profil konselor)."]
+        ["Akun & Kredensial", "Akun terdaftar role 'admin' (email: admin@ruangtumbuh.com)."],
+        ["Perangkat", "Laptop atau PC Desktop dengan layar minimal resolusi 1280 x 720 piksel."],
+        ["Peramban Web", "Google Chrome, Microsoft Edge, atau Mozilla Firefox versi mutakhir."],
+        ["Koneksi Internet", "Koneksi stabil minimal 2 Mbps."]
     ]
     add_table_data(doc, prereq_headers, prereq_data, [Inches(2.2), Inches(4.2)], theme_color="1E3A8A")
 
@@ -257,56 +257,45 @@ def generate_admin_doc():
     add_heading_1(doc, "4. Langkah Penggunaan (Step-by-Step)")
     
     add_heading_2(doc, "4.1 Masuk ke Halaman Login & Autentikasi Admin")
-    add_paragraph(doc, "Langkah-langkah untuk masuk ke panel Administrator:\n"
-                  "1. Buka peramban web dan akses alamat: https://ruangtumbuh.appocket.id/login\n"
-                  "2. Masukkan alamat email atau username Administrator pada formulir yang tersedia.\n"
-                  "3. Masukkan kata sandi (password) akun Anda.\n"
-                  "4. Klik tombol 'Masuk' atau 'Log in'. Sistem akan secara otomatis mengarahkan Anda ke Dashboard Admin.")
+    add_paragraph(doc, "Untuk masuk ke sistem:\n"
+                  "1. Buka browser dan arahkan ke: https://ruangtumbuh.appocket.id/login\n"
+                  "2. Masukkan email Administrator (admin@ruangtumbuh.com) dan password.\n"
+                  "3. Klik tombol 'Log in'. Sistem otomatis membuka Dashboard Administrator.")
     add_screenshot(doc, "02_login_page.png", "Gambar 1.1: Halaman Masuk (Login) Ruang Tumbuh")
 
-    add_heading_2(doc, "4.2 Mengenal Tampilan Dashboard Administrator")
-    add_paragraph(doc, "Dashboard Administrator merupakan beranda kendali utama yang menampilkan ringkasan data penting, navigasi cepat ke seluruh modul, serta indikator operasional.")
+    add_heading_2(doc, "4.2 Tinjauan Antarmuka Dashboard Administrator")
+    add_paragraph(doc, "Dashboard Administrator (/admin) memberikan ikhtisar menyeluruh terhadap operasional sistem, navigasi cepat pada bilah sisi kiri, serta indikator aktivitas.")
     add_screenshot(doc, "admin_01_dashboard.png", "Gambar 1.2: Antarmuka Dashboard Administrator Ruang Tumbuh")
-    add_callout(doc, "Menu navigasi bilah sisi (sidebar) kiri memuat tautan cepat ke: Manajemen Pengguna, Manajemen Konselor, Bank Soal, Skala Pilihan, Interpretasi Skor, Modul Budaya Nusantara, dan Pelajaran.", title="📌 TIPS NAVIGASI", border_color="0D9488", bg_color="F0FDFA")
 
     add_heading_2(doc, "4.3 Manajemen Akun Pengguna (Users)")
-    add_paragraph(doc, "Pada menu 'Users' (/admin/users), Administrator dapat melihat daftar seluruh pengguna terdaftar (Admin, Konselor, Konseli), mencari pengguna berdasarkan nama/email, serta menambahkan akun baru atau mereset password.")
+    add_paragraph(doc, "Pada menu 'Users' (/admin/users), Anda dapat memantau seluruh pengguna terdaftar, menyaring berdasarkan role (Admin, Konselor, Konseli), menambahkan pengguna baru, serta melakukan pengubahan kata sandi atau data profil.")
     add_screenshot(doc, "admin_02_users.png", "Gambar 1.3: Halaman Manajemen Pengguna (Users)")
-    
-    headers_user_action = ["Aksi / Tombol", "Fungsi & Kegunaan"]
-    data_user_action = [
-        ["Tambah Pengguna (+)", "Membuka formulir pendaftaran akun pengguna baru secara manual."],
-        ["Filter Role", "Menyaring tampilan daftar pengguna berdasarkan role (Admin, Konselor, atau Konseli)."],
-        ["Tombol Edit (Ikon Pensil)", "Memperbarui nama, email, username, atau mengubah kata sandi akun."],
-        ["Tombol Hapus (Ikon Sampah)", "Menghapus akun pengguna dari pangkalan data sistem."]
-    ]
-    add_table_data(doc, headers_user_action, data_user_action, [Inches(2.2), Inches(4.2)])
 
-    add_heading_2(doc, "4.4 Manajemen Profil Konselor")
-    add_paragraph(doc, "Menu 'Counselors' (/admin/counselors) digunakan untuk mengelola profil publik para konselor yang akan dipilih oleh siswa. Profil ini mencakup riwayat pendidikan, motto hidup, nomor WhatsApp untuk konsultasi cepat, dan nomor urut tampilan.")
+    add_heading_2(doc, "4.4 Manajemen Data & Profil Konselor")
+    add_paragraph(doc, "Menu 'Counselors' (/admin/counselors) digunakan untuk mengelola konselor yang akan tampil di hadapan siswa. Atur nomor urut penampilan (Order Number), nomor kontak WhatsApp untuk darurat/konsultasi cepat, serta motto dan biografi keilmuan.")
     add_screenshot(doc, "admin_03_counselors.png", "Gambar 1.4: Halaman Manajemen Data Konselor")
-    add_callout(doc, "Nomor Urut (Order Number) menentukan urutan kemunculan konselor di beranda siswa. Berikan nomor urut yang rapi agar konselor prioritas muncul di baris teratas.", title="💡 TIPS PENGATURAN KONSELOR", border_color="2563EB", bg_color="EFF6FF")
 
     add_heading_2(doc, "4.5 Manajemen Bank Soal Instrumen (Questions)")
-    add_paragraph(doc, "Menu 'Questions' (/admin/questions) memuat butir-butir pertanyaan asesmen psikologis. Administrator dapat menentukan apakah soal termasuk ke dalam Skala Resiliensi atau Skala Deteksi Risiko Ide Bunuh Diri, serta menentukan dimensi aspek kepribadian.")
+    add_paragraph(doc, "Menu 'Questions' (/admin/questions) memuat bank soal instrumen terstandar:\n"
+                  "• Bagian 1: 25 butir Psychological Well-Being (kategori: well_being) yang mengukur 6 dimensi: Penerimaan Diri, Relasi Positif, Otonomi, Penguasaan Lingkungan, Tujuan Hidup, dan Pertumbuhan Pribadi.\n"
+                  "• Bagian 2: 12 butir Identifikasi Diri / Ide Bunuh Diri (kategori: suicide_ideation) yang mengukur intensitas pikiran negatif dan risiko psikologis.")
     add_screenshot(doc, "admin_04_questions.png", "Gambar 1.5: Manajemen Bank Soal Asesmen Psikologis")
 
     add_heading_2(doc, "4.6 Pengaturan Skala Pilihan Jawaban (Option Groups)")
-    add_paragraph(doc, "Menu 'Option Groups' (/admin/option-groups) mengatur bobot nilai dari setiap opsi pilihan ganda (misal: Skala Likert 1-4 atau 1-5, Sangat Tidak Sesuai hingga Sangat Sesuai).")
-    add_screenshot(doc, "admin_05_option_groups.png", "Gambar 1.6: Halaman Skala Pilihan Jawaban (Option Groups)")
+    add_paragraph(doc, "Menu 'Option Groups' (/admin/option-groups) mengatur pembobotan skala (Skala Likert 1–5: Sangat Tidak Sesuai s.d. Sangat Sesuai, atau Skala Frekuensi Tidak Pernah s.d. Selalu).")
+    add_screenshot(doc, "admin_05_option_groups.png", "Gambar 1.6: Halaman Skala Pilihan Jawaban")
 
-    add_heading_2(doc, "4.7 Manajemen Interpretasi Skor Asesmen")
-    add_paragraph(doc, "Menu 'Interpretations' (/admin/interpretations) menentukan batasan skor (rentang nilai minimum dan maksimum), nama kategori hasil asesmen (Rendah, Sedang, Tinggi), serta deskripsi rekomendasi tindakan yang otomatis muncul pada laporan hasil siswa.")
+    add_heading_2(doc, "4.7 Manajemen Norma & Interpretasi Skor Asesmen")
+    add_paragraph(doc, "Menu 'Interpretations' (/admin/interpretations) mengatur rentang skor, norma kategorisasi hasil asesmen, dan narasi rekomendasi tindakan klinis.")
     add_screenshot(doc, "admin_06_interpretations.png", "Gambar 1.7: Halaman Manajemen Interpretasi Skor")
 
-    add_heading_2(doc, "4.8 Manajemen Modul Self-Help Kearifan Budaya (Tribes & Materials)")
-    add_paragraph(doc, "Platform Ruang Tumbuh memiliki keunikan berupa modul intervensi berbasis kearifan budaya Nusantara (Tribes). Administrator mengelola suku budaya, materi cerita kearifan lokal, dan pertanyaan refleksi mandiri bagi siswa.")
+    add_heading_2(doc, "4.8 Manajemen Modul Self-Help Budaya (Tribes & Materials)")
+    add_paragraph(doc, "Menu 'Tribes' (/admin/tribes) memuat khazanah suku budaya Nusantara. Klik tombol 'Materials' untuk menyusun materi narasi inspiratif dan butir pertanyaan reflektif SFBC bagi siswa.")
     add_screenshot(doc, "admin_07_tribes.png", "Gambar 1.8: Daftar Suku Budaya Nusantara (Tribes)")
-    add_paragraph(doc, "Untuk mengelola materi dan pertanyaan pada suku tertentu, klik tombol 'Materials' pada baris suku yang dipilih:")
-    add_screenshot(doc, "admin_08_materials.png", "Gambar 1.9: Manajemen Materi Refleksi SFBC pada Suku Terpilih")
+    add_screenshot(doc, "admin_08_materials.png", "Gambar 1.9: Manajemen Materi Refleksi SFBC pada Modul Terpilih")
 
-    add_heading_2(doc, "4.9 Manajemen Modul Pembelajaran Edukatif (Lessons)")
-    add_paragraph(doc, "Menu 'Lessons' (/admin/lessons) memungkinkan Administrator mempublikasikan artikel edukatif, video bimbingan, atau panduan kesehatan mental remaja yang dapat diakses oleh seluruh siswa.")
+    add_heading_2(doc, "4.9 Manajemen Modul Pembelajaran (Lessons)")
+    add_paragraph(doc, "Menu 'Lessons' (/admin/lessons) digunakan untuk mempublikasikan artikel psikoedukasi, video motivasi, dan panduan keterampilan hidup yang dapat dipelajari secara mandiri oleh siswa.")
     add_screenshot(doc, "admin_09_lessons.png", "Gambar 1.10: Halaman Manajemen Modul Pembelajaran (Lessons)")
 
     output_path = os.path.join(DOCS_DIR, "Panduan_Pengguna_Ruang_Tumbuh_Admin.docx")
@@ -317,48 +306,49 @@ def generate_admin_doc():
 # 2. GENERATE DOKUMEN KONSELOR
 # ==============================================================================
 def generate_konselor_doc():
-    print("Membangun Dokumen: Panduan_Pengguna_Ruang_Tumbuh_Konselor.docx...")
+    print("Membangun Dokumen Baru: Panduan_Pengguna_Ruang_Tumbuh_Konselor.docx...")
     doc = setup_document("Buku Panduan Konselor")
     add_cover(
         doc,
         title="Buku Panduan Pengguna: Konselor",
-        subtitle="Platform Pendampingan Psikologis & Layanan Konseling Online Remaja",
-        module_name="Modul Layanan Konseling & Pemantauan Konseli (Konselor)"
+        subtitle="Platform Konseling Online, Skrining Resiliensi, & Peringatan Krisis Remaja",
+        module_name="Modul Layanan Konseling Klinis & Pemantauan Binaan (Konselor)"
     )
 
     # 1. Judul & Versi
     add_heading_1(doc, "1. Informasi Modul & Akses Sistem")
-    add_paragraph(doc, "Dokumen ini menyajikan panduan lengkap bagi Konselor Ruang Tumbuh dalam memberikan pendampingan bimbingan dan konseling kepada siswa (konseli). Modul ini mencakup ruang kerja konseling interaktif, telekonseling video (Google Meet / Zoom), pemantauan skor asesmen resiliensi, pemeriksaan refleksi budaya, serta pencatatan evaluasi sesi.")
+    add_paragraph(doc, "Dokumen ini menyajikan panduan komprehensif bagi Konselor Ruang Tumbuh. Melalui pembaruan sistem terkini, modul Konselor dilengkapi fitur skrining klinis mutakhir berbasis instrumen Psychological Well-Being Carol D. Ryff (25 butir) dan Skala Deteksi Ide Bunuh Diri (12 butir), indikator peringatan krisis otomatis, manajemen sesi konseling daring (live chat & Google Meet/Zoom), serta lembar analisis komparasi dimensi psikologis.")
     
     headers_info = ["Komponen", "Spesifikasi / Keterangan"]
     data_info = [
         ["Nama Aplikasi", "Ruang Tumbuh"],
         ["Domain Akses", "https://ruangtumbuh.appocket.id"],
         ["Role Sasaran", "Konselor / Guru Bimbingan dan Konseling (BK)"],
-        ["Modul Utama", "Dashboard Binaan, Live Chat, Video Meet, Skor Asesmen, & Evaluasi"],
+        ["Modul Utama", "Peringatan Krisis, Skrining Prioritas, Live Chat, Telekonseling, & Evaluasi"],
         ["Periode Pembaruan", "Oktober 2026"],
     ]
     add_table_data(doc, headers_info, data_info, [Inches(2.0), Inches(4.4)], theme_color="0D9488")
 
     # 2. Pendahuluan Ringan
     add_heading_1(doc, "2. Pendahuluan Ringan")
-    add_paragraph(doc, "Peran Konselor dalam platform Ruang Tumbuh adalah sebagai fasilitator pertumbuhan psikologis siswa. Melalui sistem ini, Konselor dapat memonitor kondisi kesejahteraan mental siswa binaannya secara terstruktur, memberikan intervensi solusi singkat (SFBC), dan mendeteksi sedini mungkin potensi risiko psikologis.")
-    add_paragraph(doc, "Fitur-fitur utama bagi Konselor:\n"
-                  "1. Pemantauan Konseli Binaan: Mengetahui siswa mana saja yang telah memilih Anda sebagai konselor pendamping.\n"
-                  "2. Rekam Jejak Asesmen: Memeriksa skor hasil pre-test dan post-test resiliensi serta indikator risiko siswa, lengkap dengan fitur unduh PDF resmi.\n"
-                  "3. Layanan Chat Konseling: Berkomunikasi secara privat, empatik, dan aman melalui ruang obrolan langsung.\n"
-                  "4. Penjadwalan Temu Virtual: Menyepakati waktu tatap muka virtual dan menyematkan tautan Google Meet / Zoom.\n"
-                  "5. Evaluasi & Rekomendasi Sesi: Memberikan catatan kemajuan konseli dan tindak lanjut pasca sesi konseling.")
+    add_paragraph(doc, "Dalam platform Ruang Tumbuh, Konselor berperan sebagai garda terdepan dalam menjaga keselamatan dan menumbuhkan daya lenting (resiliensi) remaja. Sistem secara otomatis menganalisis jawaban asesmen siswa dan memetakan tingkat risiko agar konselor dapat segera memberikan respon yang tepat dan proporsional.")
+    add_paragraph(doc, "Fitur-fitur unggulan modul Konselor terkini:\n"
+                  "1. 4 Kartu Statistik Cepat: Memantau Total Konseli Terdaftar, Jadwal Sesi Aktif, Peringatan Krisis (Merah), dan Prioritas Skrining (Kuning <= 80).\n"
+                  "2. Badge Peringatan Otomatis: Memberi tanda '⚠ Krisis' (merah mencolok) jika skor Ide Bunuh Diri >= 41 atau butir inti bernilai tinggi, serta badge 'Prioritas (<= 80)' jika kesejahteraan psikologis rendah.\n"
+                  "3. Kolom Skor Terpisah: Menampilkan skor 'WB: {skor}/125' dan 'Ide: {skor}/60' secara transparan pada tabel daftar binaan.\n"
+                  "4. Analisis Mendalam 6 Dimensi Well-Being & 4 Aspek Ide Bunuh Diri: Disertai norma empiris, titik potong skrining, dan protokol tindakan darurat klinis.\n"
+                  "5. Ruang Sesi & Live Chat: Berbalas pesan langsung dan mengatur jadwal pertemuan tatap muka virtual (Google Meet / Zoom).\n"
+                  "6. Laporan PDF Resmi: Mengunduh arsip asesmen siswa dalam format dokumen cetak resmi.")
 
     # 3. Prasyarat (Prerequisites)
     add_heading_1(doc, "3. Prasyarat (Prerequisites)")
     prereq_headers = ["Kebutuhan", "Spesifikasi Minimal yang Disarankan"]
     prereq_data = [
-        ["Akun Konselor", "Akun aktif ber-role 'konselor' yang telah didaftarkan oleh Administrator."],
-        ["Perangkat", "Laptop, PC, atau Tablet yang dilengkapi kamera depan (webcam) dan mikrofon."],
-        ["Peramban Web", "Google Chrome, Microsoft Edge, atau browser modern versi terkini."],
-        ["Koneksi Internet", "Koneksi stabil minimal 5 Mbps (sangat disarankan untuk kelancaran video call)."],
-        ["Platform Telekonseling", "Akun Google (untuk Google Meet) atau Zoom Meeting."]
+        ["Akun Konselor", "Akun aktif dengan role 'konselor' (didaftarkan oleh Administrator)."],
+        ["Perangkat", "Laptop atau PC yang dilengkapi mikrofon dan kamera (webcam)."],
+        ["Peramban Web", "Google Chrome atau Microsoft Edge versi terkini."],
+        ["Koneksi Internet", "Minimal 5 Mbps stabil untuk mendukung telekonseling video tanpa hambatan."],
+        ["Platform Eksternal", "Akun Google untuk penyelenggaraan Google Meet / Zoom."]
     ]
     add_table_data(doc, prereq_headers, prereq_data, [Inches(2.2), Inches(4.2)], theme_color="0D9488")
 
@@ -366,45 +356,42 @@ def generate_konselor_doc():
     add_heading_1(doc, "4. Langkah Penggunaan (Step-by-Step)")
     
     add_heading_2(doc, "4.1 Masuk ke Halaman Login Konselor")
-    add_paragraph(doc, "Langkah masuk ke sistem:\n"
-                  "1. Buka browser dan kunjungi https://ruangtumbuh.appocket.id/login\n"
-                  "2. Masukkan alamat email institusi / username konselor yang telah terdaftar.\n"
-                  "3. Masukkan password akun Konselor Anda.\n"
-                  "4. Klik tombol 'Log in'. Sistem langsung mengarahkan Anda ke Dashboard Konselor.")
+    add_paragraph(doc, "Kunjungi https://ruangtumbuh.appocket.id/login, masukkan email/username konselor dan kata sandi, lalu klik tombol 'Log in'.")
     add_screenshot(doc, "02_login_page.png", "Gambar 2.1: Halaman Masuk Akun Konselor")
 
-    add_heading_2(doc, "4.2 Memahami Dashboard Konselor & Daftar Siswa Binaan")
-    add_paragraph(doc, "Setelah login berhasil, Anda akan disambut oleh Dashboard Konselor (/konselor). Halaman ini menampilkan sambutan personal, panduan ringkas alur kerja konseling, serta tabel daftar seluruh siswa yang telah memilih Anda sebagai konselor pendamping.")
-    add_screenshot(doc, "konselor_01_dashboard.png", "Gambar 2.2: Tampilan Dashboard Konselor & Daftar Konseli Binaan")
-
-    headers_konselor_menu = ["Tombol / Kolom", "Keterangan Fungsi"]
-    data_konselor_menu = [
-        ["Nama Siswa & Sekolah", "Menampilkan identitas siswa binaan, kelas, dan asal sekolah."],
-        ["Hasil Asesmen", "Membuka halaman pemantauan skor Wellbeing dan deteksi risiko siswa."],
-        ["Jawaban Self-Help", "Melihat hasil refleksi pengerjaan modul kearifan lokal oleh siswa."],
-        ["Ruang Sesi Konseling", "Membuka ruang komunikasi chat, jadwal temu, dan evaluasi konseling."]
+    add_heading_2(doc, "4.2 Dashboard Konselor: Monitoring Skrining & Peringatan Krisis")
+    add_paragraph(doc, "Dashboard Konselor (/konselor) kini dilengkapi 4 kartu statistik cerdas di bagian atas dan tabel daftar siswa binaan dengan indikator peringatan visual:")
+    add_screenshot(doc, "konselor_01_dashboard.png", "Gambar 2.2: Tampilan Baru Dashboard Konselor dengan Peringatan Krisis & Skrining")
+    
+    headers_dashboard_guide = ["Elemen Antarmuka", "Keterangan Klinis & Fungsi"]
+    data_dashboard_guide = [
+        ["Kartu Peringatan Krisis (Merah)", "Jumlah siswa yang membutuhkan penanganan segera di hari yang sama (Skor Ide >= 41 atau butir inti frekuensi tinggi)."],
+        ["Kartu Prioritas Skrining (Kuning)", "Jumlah siswa dengan skor Well-Being <= 80 (skala 125) yang masuk prioritas pencegahan selektif."],
+        ["Kolom Skor Awal & Skor Akhir", "Menampilkan skor ganda: 'WB: {skor}/125' dan 'Ide: {skor}/60'."],
+        ["Badge ⚠ Krisis & Prioritas", "Badge warna mencolok untuk memudahkan konselor menentukan urutan prioritas penanganan siswa."],
+        ["Tombol 'Sesi & Chat'", "Membuka ruang komunikasi dan manajemen sesi konseling online."],
+        ["Tombol 'Hasil Asesmen & PDF'", "Membuka lembar analisis lengkap 6 dimensi psikologis dan unduh laporan PDF."]
     ]
-    add_table_data(doc, headers_konselor_menu, data_konselor_menu, [Inches(2.2), Inches(4.2)], theme_color="0D9488")
+    add_table_data(doc, headers_dashboard_guide, data_dashboard_guide, [Inches(2.2), Inches(4.2)], theme_color="0D9488")
 
-    add_heading_2(doc, "4.3 Mengelola Sesi Konseling, Live Chat, & Jadwal Pertemuan")
-    add_paragraph(doc, "Klik tombol 'Ruang Sesi Konseling' pada baris siswa yang bersangkutan untuk masuk ke ruang kerja konseling (/konselor/konseli/{id}/session). Di halaman ini Anda dapat:\n"
-                  "1. Berbalas pesan instan (Live Chat) dengan siswa secara aman dan tertutup.\n"
-                  "2. Menentukan Jadwal Konseling dan memasukkan tautan Google Meet / Zoom agar siswa dapat langsung bergabung pada jam yang ditentukan.\n"
-                  "3. Menuliskan catatan Evaluasi Sesi dan Rekomendasi Tindak Lanjut.")
-    add_screenshot(doc, "konselor_02_konseli_session.png", "Gambar 2.3: Ruang Kerja Sesi Konseling Konselor")
-    add_callout(doc, "Pastikan untuk selalu memperbarui status jadwal dan menyematkan link video conference setidaknya 30 menit sebelum sesi konseling dimulai.", title="💬 TIPS PENJADWALAN KONSULTASI", border_color="0D9488", bg_color="F0FDFA")
+    add_heading_2(doc, "4.3 Ruang Sesi Konseling: Live Chat & Jadwal Virtual")
+    add_paragraph(doc, "Klik tombol 'Sesi & Chat' untuk masuk ke ruang kerja konseling (/konselor/konseli/{id}/session). Header halaman menampilkan identitas siswa, status skor terbaru, serta banner darurat jika siswa terindikasi krisis.")
+    add_screenshot(doc, "konselor_02_konseli_session.png", "Gambar 2.3: Ruang Sesi Konseling Konselor Lengkap dengan Chat & Penjadwalan Meet")
+    add_callout(doc, "Lakukan penetapan jadwal temu dan sematkan link Google Meet setidaknya 1 jam sebelum sesi agar siswa menerima jadwal dengan jelas.", title="💡 TIPS PENJADWALAN KONSELI", border_color="0D9488", bg_color="F0FDFA")
 
-    add_heading_2(doc, "4.4 Memantau Hasil Asesmen Psikologis & Unduh Laporan PDF")
-    add_paragraph(doc, "Konselor dapat meninjau hasil tes asesmen siswa melalui menu 'Hasil Asesmen' (/konselor/konseli/{id}/wellbeing). Halaman ini menyajikan skor resiliensi, dimensi resiliensi yang perlu ditingkatkan, serta indikator risiko psikologis.")
-    add_screenshot(doc, "konselor_03_konseli_wellbeing.png", "Gambar 2.4: Lembar Analisis Skor Asesmen Konseli")
-    add_paragraph(doc, "Fitur pada lembar asesmen:\n"
-                  "• Unduh Laporan PDF: Klik tombol 'Unduh PDF' untuk menyimpan arsip laporan perkembangan siswa secara resmi.\n"
-                  "• Reset Asesmen: Jika siswa mengalami kendala teknis saat mengisi atau membutuhkan tes ulang berkala, konselor dapat mereset instrumen.")
-    add_callout(doc, "Jika terdeteksi indikator risiko tinggi pada asesmen siswa, segera lakukan kontak prioritas melalui live chat atau hubungi pihak sekolah/wali untuk pendampingan intensif.", title="🚨 PERINGATAN RISIKO PSIKOLOGIS", border_color="E11D48", bg_color="FFF1F2")
+    add_heading_2(doc, "4.4 Analisis Klinis Asesmen Psikologis & Laporan PDF Resmi")
+    add_paragraph(doc, "Klik tombol 'Hasil Asesmen & PDF' (/konselor/konseli/{id}/wellbeing). Halaman ini menyajikan rincian komprehensif:\n"
+                  "1. Ringkasan Skor & Titik Potong Skrining: Membandingkan perolehan skor siswa dengan norma populasi (M=91.70, SD=11.93).\n"
+                  "2. Analisis 6 Dimensi Well-Being: Menampilkan skor pada dimensi Penerimaan Diri, Relasi Positif, Otonomi, Penguasaan Lingkungan, Tujuan Hidup, dan Pertumbuhan Pribadi.\n"
+                  "3. Analisis 4 Aspek Ide Bunuh Diri: Membedah keputusasaan, perasaan menjadi beban, dan pikiran tentang kematian.\n"
+                  "4. Protokol Tindakan Klinis: Panduan baku tindakan darurat, safety planning, dan rujukan profesional.\n"
+                  "5. Unduh PDF & Reset: Tombol unduh laporan resmi untuk arsip sekolah serta reset asesmen jika diperlukan tes ulang.")
+    add_screenshot(doc, "konselor_03_konseli_wellbeing.png", "Gambar 2.4: Lembar Analisis Klinis Asesmen Well-Being & Ide Bunuh Diri")
+    add_callout(doc, "Jika siswa memiliki indikator '⚠ Krisis', segera lakukan kontak di hari yang sama, libatkan wali kelas/orang tua, dan susun rencana keselamatan (safety plan).", title="🚨 PROTOKOL TINDAKAN KRISIS", border_color="DC2626", bg_color="FEF2F2")
 
-    add_heading_2(doc, "4.5 Memeriksa Jawaban Modul Self-Help Budaya Nusantara")
-    add_paragraph(doc, "Siswa dibekali latihan reflektif mandiri melalui kearifan budaya Nusantara. Konselor dapat membaca respons narasi siswa melalui tombol 'Jawaban Self-Help' (/konselor/konseli/{id}/self-help). Informasi ini sangat berguna sebagai bahan eksplorasi saat sesi konseling tatap muka.")
-    add_screenshot(doc, "konselor_04_konseli_selfhelp.png", "Gambar 2.5: Pemantauan Lembar Refleksi Mandiri Budaya Konseli")
+    add_heading_2(doc, "4.5 Memeriksa Jawaban Refleksi Budaya Konseli")
+    add_paragraph(doc, "Melalui tombol 'Jawaban Self-Help' (/konselor/konseli/{id}/self-help), konselor dapat meninjau narasi reflektif siswa terhadap modul kearifan lokal yang telah dikerjakannya sebagai bahan eksplorasi solusi singkat (SFBC).")
+    add_screenshot(doc, "konselor_04_konseli_selfhelp.png", "Gambar 2.5: Pemantauan Lembar Refleksi Mandiri Budaya Siswa")
 
     output_path = os.path.join(DOCS_DIR, "Panduan_Pengguna_Ruang_Tumbuh_Konselor.docx")
     doc.save(output_path)
@@ -414,48 +401,49 @@ def generate_konselor_doc():
 # 3. GENERATE DOKUMEN KONSELI (SISWA)
 # ==============================================================================
 def generate_konseli_doc():
-    print("Membangun Dokumen: Panduan_Pengguna_Ruang_Tumbuh_Konseli.docx...")
+    print("Membangun Dokumen Baru: Panduan_Pengguna_Ruang_Tumbuh_Konseli.docx...")
     doc = setup_document("Buku Panduan Siswa (Konseli)")
     add_cover(
         doc,
         title="Buku Panduan Pengguna: Siswa (Konseli)",
-        subtitle="Tempat Nyaman Remaja Bercerita, Bertumbuh, & Membangun Resiliensi Diri",
-        module_name="Modul Layanan Konseling Mandiri & Interaksi Siswa (Konseli)"
+        subtitle="Ruang Aman Remaja Bercerita, Bertumbuh, & Membangun Resiliensi Diri",
+        module_name="Modul Layanan Konseling Mandiri & Evaluasi Perkembangan (Konseli)"
     )
 
     # 1. Judul & Versi
     add_heading_1(doc, "1. Informasi Modul & Akses Sistem")
-    add_paragraph(doc, "Dokumen ini merupakan panduan ramah pengguna bagi Siswa / Remaja (Konseli) dalam memanfaatkan seluruh fitur di aplikasi Ruang Tumbuh. Panduan ini menjelaskan bagaimana cara mengukur resiliensi diri, memilih konselor bimbingan konseling yang cocok, berdialog secara privat, serta mempelajari materi pengembangan diri berbasis kearifan budaya Nusantara.")
+    add_paragraph(doc, "Buku panduan ini disusun khusus untuk Siswa / Remaja (Konseli) agar dapat memanfaatkan platform Ruang Tumbuh dengan nyaman, aman, dan mandiri. Panduan ini mencakup langkah pendaftaran akun, pengisian asesmen resiliensi diri (Well-Being & Deteksi Pikiran Negatif), pemilihan konselor pendamping, percakapan konseling daring, hingga melihat perkembangan kemajuan diri melalui halaman Evaluasi & Tindak Lanjut.")
     
     headers_info = ["Komponen", "Spesifikasi / Keterangan"]
     data_info = [
         ["Nama Aplikasi", "Ruang Tumbuh"],
         ["Domain Akses", "https://ruangtumbuh.appocket.id"],
         ["Role Sasaran", "Siswa / Remaja (Konseli)"],
-        ["Fitur Utama", "Tes Asesmen Diri, Pilih Konselor, Chat & Video Konseling, Modul Budaya"],
+        ["Fitur Unggulan", "Asesmen Diri, Pilih Konselor, Chat & Video Meet, Grafik Evaluasi, & Modul Budaya"],
         ["Periode Pembaruan", "Oktober 2026"],
     ]
     add_table_data(doc, headers_info, data_info, [Inches(2.0), Inches(4.4)], theme_color="2563EB")
 
     # 2. Pendahuluan Ringan
     add_heading_1(doc, "2. Pendahuluan Ringan")
-    add_paragraph(doc, "Selamat datang di Ruang Tumbuh! Aplikasi ini hadir sebagai ruang yang aman, nyaman, dan bebas penghakiman untuk kamu yang ingin mengenali diri, mengatasi kecemasan atau stres sekolah, serta menemukan kembali semangat dan daya juang (resiliensi).")
-    add_paragraph(doc, "Apa saja yang bisa kamu lakukan di Ruang Tumbuh?\n"
-                  "1. Mengetahui Kekuatan Dirimu: Mengisi asesmen singkat untuk mengetahui tingkat resiliensi dan kondisi kesehatan mentalmu.\n"
-                  "2. Didampingi Konselor Terpercaya: Kamu bebas memilih konselor atau guru BK yang paling membuatmu nyaman.\n"
-                  "3. Curhat & Konseling Privat: Bertukar pesan via chat atau melakukan tatap muka virtual tanpa khawatir rahasiamu bocor.\n"
-                  "4. Belajar dari Kearifan Leluhur: Membaca kisah-kisah bijak Nusantara yang memotivasi dan mengisi lembar refleksi diri.")
-    add_callout(doc, "Seluruh cerita, jawaban asesmen, dan percakapanmu dengan konselor di Ruang Tumbuh dijamin kerahasiaannya sesuai kode etik bimbingan dan konseling. Ceritakan apa adanya dengan jujur ya!", title="🛡️ PRIVASI DAN KERAHASIAAN TERJAMIN", border_color="2563EB", bg_color="EFF6FF")
+    add_paragraph(doc, "Selamat datang di Ruang Tumbuh! Aplikasi ini dirancang sebagai tempat curhat yang aman, nyaman, dan bebas stigma untuk membantumu mengatasi stres belajar, kecemasan, rasa tertekan, atau masalah pertemanan.")
+    add_paragraph(doc, "Keuntungan menggunakan Ruang Tumbuh:\n"
+                  "1. Mengetahui Kondisi Kesejahteraan Mentalmu: Melalui asesmen terstandar (skala 125 poin), kamu bisa mengetahui kekuatan diri dan hal-hal yang perlu kamu tingkatkan.\n"
+                  "2. Konselor Pendamping yang Ramah: Kamu bebas memilih guru BK atau konselor profesional yang paling membuatmu nyaman.\n"
+                  "3. Percakapan Tertutup & Rahasia: Seluruh curhatanmu dijamin kerahasiaannya sesuai kode etik profesi konseling.\n"
+                  "4. Grafik Evaluasi Kemajuan: Kamu bisa memantau peningkatan kesejahteraan psikologismu sebelum dan sesudah mengikuti bimbingan konseling.\n"
+                  "5. Modul Kearifan Budaya Nusantara: Cerita inspiratif dan petuah bijak dari suku nusantara untuk melatih ketangguhan mentalmu.")
+    add_callout(doc, "Jangan ragu untuk menceritakan kondisi yang sebenarnya. Konselor hadir untuk mendengarkan, memahami, dan membantumu menemukan solusi terbaik tanpa menghakimi.", title="🛡️ PRIVASI & KERAHASIAAN AMAN", border_color="2563EB", bg_color="EFF6FF")
 
     # 3. Prasyarat (Prerequisites)
     add_heading_1(doc, "3. Prasyarat (Prerequisites)")
     prereq_headers = ["Kebutuhan", "Penjelasan"]
     prereq_data = [
-        ["Akun Siswa", "Kamu dapat mendaftar akun mandiri secara gratis melalui menu 'Daftar'."],
-        ["Perangkat", "Bisa menggunakan Smartphone (HP Android/iPhone), Tablet, maupun Laptop."],
-        ["Peramban (Browser)", "Gunakan aplikasi Google Chrome, Safari, atau Microsoft Edge."],
-        ["Koneksi Internet", "Koneksi data seluler atau Wi-Fi yang lancar."],
-        ["Aplikasi Pendukung", "Aplikasi Google Meet jika ingin melakukan tatap muka virtual lewat HP."]
+        ["Akun Siswa", "Daftar mandiri melalui formulir registrasi online."],
+        ["Perangkat", "Smartphone (Android / iPhone), Tablet, atau Laptop/PC."],
+        ["Peramban (Browser)", "Google Chrome, Safari, atau Microsoft Edge."],
+        ["Koneksi Internet", "Akses internet seluler atau Wi-Fi yang stabil."],
+        ["Aplikasi Pendukung", "Aplikasi Google Meet jika ingin melakukan panggilan video tatap muka lewat HP."]
     ]
     add_table_data(doc, prereq_headers, prereq_data, [Inches(2.2), Inches(4.2)], theme_color="2563EB")
 
@@ -463,61 +451,58 @@ def generate_konseli_doc():
     add_heading_1(doc, "4. Langkah Penggunaan (Step-by-Step)")
     
     add_heading_2(doc, "4.1 Pendaftaran Akun Siswa Baru (Registrasi)")
-    add_paragraph(doc, "Jika kamu belum memiliki akun, ikuti langkah berikut:\n"
-                  "1. Buka https://ruangtumbuh.appocket.id/register\n"
-                  "2. Masukkan Nama Lengkap, Username unik, dan Alamat Email aktif.\n"
-                  "3. Pilih Jenis Kelamin, Kelas, dan Asal Sekolahmu.\n"
-                  "4. Buat kata sandi (password) yang mudah kamu ingat.\n"
-                  "5. Klik tombol 'Daftar Sekarang'. Akunmu langsung aktif!")
-    add_screenshot(doc, "03_register_page.png", "Gambar 3.1: Halaman Pendaftaran Akun Siswa Baru")
+    add_paragraph(doc, "1. Buka tautan: https://ruangtumbuh.appocket.id/register\n"
+                  "2. Masukkan Nama Lengkap, Username, Alamat Email aktif, Asal Sekolah, Kelas, dan Jenis Kelamin.\n"
+                  "3. Buat kata sandi akunmu, lalu klik 'Daftar Sekarang'.")
+    add_screenshot(doc, "03_register_page.png", "Gambar 3.1: Halaman Registrasi Akun Siswa Baru")
 
     add_heading_2(doc, "4.2 Masuk ke Akun (Login)")
-    add_paragraph(doc, "Bagi yang sudah memiliki akun, kunjungi https://ruangtumbuh.appocket.id/login, masukkan email/username dan password, lalu klik tombol 'Masuk'.")
+    add_paragraph(doc, "Kunjungi https://ruangtumbuh.appocket.id/login, masukkan email/username dan kata sandi, lalu klik tombol 'Masuk'.")
     add_screenshot(doc, "02_login_page.png", "Gambar 3.2: Halaman Masuk Akun Siswa")
 
     add_heading_2(doc, "4.3 Mengenal Dashboard Siswa")
-    add_paragraph(doc, "Setelah masuk, kamu akan tiba di Dashboard Siswa (/konseli). Di sini kamu bisa melihat langkah-langkah bimbingan yang perlu kamu selesaikan: mulai dari mengisi asesmen, memilih konselor, hingga mulai bercerita.")
-    add_screenshot(doc, "konseli_01_dashboard.png", "Gambar 3.3: Dashboard Utama Siswa Ruang Tumbuh")
+    add_paragraph(doc, "Setelah masuk, Dashboard Siswa (/konseli) menyajikan panduan langkah bertumbuh (Langkah 1 s.d. Langkah 7). Terdapat kartu pemantauan asesmen awal, tombol pintas unduh PDF resmi, serta akses ke seluruh layanan konseling.")
+    add_screenshot(doc, "konseli_01_dashboard.png", "Gambar 3.3: Dashboard Utama Siswa Ruang Tumbuh Terkini")
 
-    add_heading_2(doc, "4.4 Mengikuti Asesmen Resiliensi Diri (Wellbeing)")
-    add_paragraph(doc, "Langkah pertama yang sangat dianjurkan adalah mengikuti tes asesmen resiliensi (/konseli/wellbeing):\n"
-                  "1. Klik tombol 'Asesmen Resiliensi' pada menu navigasi.\n"
-                  "2. Klik 'Mulai Asesmen' untuk membuka butir-butir pernyataan.\n"
-                  "3. Jawablah setiap pernyataan sesuai dengan perasaan dan kondisi yang sesungguhnya kamu alami.\n"
-                  "4. Setelah semua pertanyaan terisi, klik tombol 'Selesai & Lihat Hasil'.")
+    add_heading_2(doc, "4.4 Mengisi Asesmen Resiliensi Diri (Well-Being)")
+    add_paragraph(doc, "Masuk ke menu 'Asesmen' (/konseli/wellbeing). Pengisian asesmen terbagi menjadi dua bagian dengan panduan psikologis yang menenangkan:\n"
+                  "• Bagian 1: Pernyataan mengenai kesejahteraan psikologis sehari-hari (25 butir).\n"
+                  "• Bagian 2: Pernyataan mengenai perasaan mendalam dan pikiran negatif (12 butir).\n"
+                  "Isi setiap pernyataan dengan jujur. Setelah selesai, kamu bisa langsung melihat hasil dan mengunduh berkas laporan PDF.")
     add_screenshot(doc, "konseli_02_wellbeing_index.png", "Gambar 3.4: Menu Asesmen Resiliensi Siswa")
-    add_callout(doc, "Setelah menyelesaikan asesmen, kamu bisa melihat ringkasan skor resiliensimu dan mengunduh berkas laporan dalam format PDF resmi.", title="📄 LAPORAN PDF HASIL ASESMEN", border_color="0D9488", bg_color="F0FDFA")
 
     add_heading_2(doc, "4.5 Memilih Konselor Pendamping")
-    add_paragraph(doc, "Kamu berhak memilih konselor yang kamu percayai:\n"
-                  "1. Masuk ke menu 'Pilih Konselor' (/konseli/counselor).\n"
-                  "2. Baca profil, latar belakang, dan motto hidup para konselor.\n"
-                  "3. Klik tombol 'Pilih Konselor Ini' pada profil konselor yang kamu kehendaki.")
-    add_screenshot(doc, "konseli_03_counselor_select.png", "Gambar 3.5: Halaman Daftar Profil & Pemilihan Konselor")
+    add_paragraph(doc, "Pada menu 'Pilih Konselor' (/konseli/counselor), kamu dapat melihat profil para konselor, riwayat pendidikan, motto hidup, serta nomor kontak. Klik tombol 'Pilih Konselor Ini' pada profil konselor yang kamu kehendaki.")
+    add_screenshot(doc, "konseli_03_counselor_select.png", "Gambar 3.5: Halaman Pemilihan Konselor Pendamping")
 
-    add_heading_2(doc, "4.6 Memulai Sesi Konseling Online (Chat & Video)")
-    add_paragraph(doc, "Setelah memilih konselor, kamu dapat masuk ke menu 'Konseling Online' (/konseli/counseling):\n"
-                  "1. Tuliskan pesan curhat atau hal yang sedang mengganjal pikiranmu di kotak chat, lalu klik kirim.\n"
-                  "2. Konselor akan membalas pesanmu dan mengajukan jadwal pertemuan daring.\n"
-                  "3. Saat jadwal tiba, kamu cukup klik tombol 'Masuk ke Video Meet' untuk terhubung langsung dengan konselormu.")
-    add_screenshot(doc, "konseli_04_counseling_room.png", "Gambar 3.6: Ruang Percakapan Chat & Info Jadwal Konseling Online")
+    add_heading_2(doc, "4.6 Ruang Konseling Online: Live Chat & Jadwal Video Meet")
+    add_paragraph(doc, "Setelah memiliki konselor, buka menu 'Konseling Online' (/konseli/counseling):\n"
+                  "1. Ketik pesan curhatmu di kotak live chat untuk memulai obrolan.\n"
+                  "2. Konselor akan membalas dan menetapkan jadwal tatap muka daring.\n"
+                  "3. Saat jadwal tiba, klik tombol 'Masuk ke Video Meet' untuk terhubung langsung melalui Google Meet.")
+    add_screenshot(doc, "konseli_04_counseling_room.png", "Gambar 3.6: Ruang Percakapan Chat & Jadwal Pertemuan Daring")
 
-    add_heading_2(doc, "4.7 Mengisi Refleksi Pasca Konseling")
-    add_paragraph(doc, "Setelah menyelesaikan sesi berbincang dengan konselor, luangkan waktu 2-3 menit untuk mengisi menu 'Refleksi Sesi' (/konseli/reflection). Refleksi ini bertujuan mencatat poin positif apa yang kamu dapatkan dan rencana aksi perbaikan dirimu ke depan.")
-    add_screenshot(doc, "konseli_05_reflection.png", "Gambar 3.7: Lembar Pengisian Refleksi Pasca Konseling")
+    add_heading_2(doc, "4.7 Mengisi Lembar Refleksi Pasca Konseling")
+    add_paragraph(doc, "Setelah sesi berbincang selesai, buka menu 'Refleksi Sesi' (/konseli/reflection) untuk menuliskan hal-hal positif yang kamu pelajari dan komitmen aksi perbaikan dirimu.")
+    add_screenshot(doc, "konseli_05_reflection.png", "Gambar 3.7: Lembar Refleksi Pasca Sesi Konseling")
 
-    add_heading_2(doc, "4.8 Modul Self-Help Kearifan Budaya Nusantara")
-    add_paragraph(doc, "Ruang Tumbuh menyediakan petuah bijak dari berbagai suku di Indonesia (/konseli/tribe):\n"
-                  "1. Pilih suku budaya yang ingin kamu pelajari (misal: Jawa, Sunda, Madura, Bugis-Makassar, dll).\n"
-                  "2. Baca kisah inspiratif dan falsafah hidup resiliensi leluhur nusantara.\n"
-                  "3. Isi pertanyaan refleksi singkat untuk melatih ketangguhan mentalmu.")
-    add_screenshot(doc, "konseli_06_tribe_select.png", "Gambar 3.8: Pilihan Suku Budaya Nusantara")
-    add_screenshot(doc, "konseli_07_selfhelp_detail.png", "Gambar 3.9: Tampilan Materi Cerita & Lembar Refleksi Mandiri Budaya")
+    add_heading_2(doc, "4.8 Halaman Evaluasi & Tindak Lanjut: Memantau Kemajuan Diri")
+    add_paragraph(doc, "Menu 'Evaluasi & Tindak Lanjut' (/konseli/evaluation) menampilkan grafik visual perbandingan hasil asesmen awal (pre-test) dan asesmen sesudah (post-test):\n"
+                  "• Grafik Komparasi Well-Being (skala 125) dan Penurunan Risiko Pikiran Negatif (skala 60).\n"
+                  "• Banner Indikator Evaluasi: Memberikan umpan balik apakah risiko menurun dan resiliensimu meningkat secara positif.\n"
+                  "• Tabel Rincian 6 Dimensi Well-Being: Menampilkan delta perolehan poin per dimensi (Penerimaan Diri, Relasi Positif, Otonomi, Penguasaan Lingkungan, Tujuan Hidup, Pertumbuhan Pribadi).\n"
+                  "• Catatan & Rekomendasi Konselor: Membaca saran perbaikan yang dituliskan langsung oleh konselormu.")
+    add_screenshot(doc, "konseli_06_evaluation.png", "Gambar 3.8: Tampilan Baru Grafik Evaluasi & Komparasi Dimensi Psikologis")
 
-    add_heading_2(doc, "4.9 Mengakses Modul Pembelajaran & Mengubah Profil")
-    add_paragraph(doc, "Kamu juga bisa membaca berbagai tips kesehatan mental di menu 'Pembelajaran' (/konseli/lessons), serta memperbarui data diri atau mengganti kata sandi di menu 'Profil' (/konseli/profile).")
-    add_screenshot(doc, "konseli_08_lessons.png", "Gambar 3.10: Menu Modul Pembelajaran Edukatif")
-    add_screenshot(doc, "konseli_09_profile.png", "Gambar 3.11: Halaman Pengaturan Profil Siswa")
+    add_heading_2(doc, "4.9 Modul Self-Help Kearifan Budaya Nusantara")
+    add_paragraph(doc, "Ruang Tumbuh menyediakan petuah bijak dari berbagai suku Nusantara (/konseli/tribe). Pelajari kisah ketangguhan leluhur dan jawab pertanyaan reflektif mandiri untuk menguatkan daya lentingmu.")
+    add_screenshot(doc, "konseli_07_tribe_select.png", "Gambar 3.9: Halaman Pilihan Suku Budaya Nusantara")
+    add_screenshot(doc, "konseli_08_selfhelp_detail.png", "Gambar 3.10: Materi Cerita & Lembar Refleksi Mandiri Budaya")
+
+    add_heading_2(doc, "4.10 Modul Pembelajaran & Pengaturan Profil")
+    add_paragraph(doc, "Kamu dapat membaca materi tips kesehatan mental di menu 'Pembelajaran' (/konseli/lessons) serta memperbarui data diri di menu 'Profil' (/konseli/profile).")
+    add_screenshot(doc, "konseli_09_lessons.png", "Gambar 3.11: Modul Pembelajaran Edukatif")
+    add_screenshot(doc, "konseli_10_profile.png", "Gambar 3.12: Pengaturan Profil Siswa")
 
     output_path = os.path.join(DOCS_DIR, "Panduan_Pengguna_Ruang_Tumbuh_Konseli.docx")
     doc.save(output_path)
@@ -530,4 +515,4 @@ if __name__ == "__main__":
     generate_admin_doc()
     generate_konselor_doc()
     generate_konseli_doc()
-    print("\nSeluruh dokumen Word (.docx) berhasil dibangun dengan sempurna!")
+    print("\nSeluruh dokumen Word (.docx) versi terbaru berhasil dibangun dengan sempurna!")

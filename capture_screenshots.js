@@ -40,7 +40,7 @@ async function run() {
   // 2. Admin Pages
   console.log('Capturing admin pages...');
   await page.goto('http://127.0.0.1:8000/login', { waitUntil: 'networkidle2' });
-  await page.type('input[name="email"], input[name="username"]', 'admin@myresilience.com');
+  await page.type('input[name="email"], input[name="username"]', 'admin@ruangtumbuh.com');
   await page.type('input[name="password"]', 'password');
   await Promise.all([
     page.waitForNavigation({ waitUntil: 'networkidle2' }),
@@ -67,7 +67,7 @@ async function run() {
   await page.goto('http://127.0.0.1:8000/admin/tribes', { waitUntil: 'networkidle2' });
   await snap('admin_07_tribes.png');
 
-  await page.goto('http://127.0.0.1:8000/admin/tribes/2/materials', { waitUntil: 'networkidle2' });
+  await page.goto('http://127.0.0.1:8000/admin/tribes/1/materials', { waitUntil: 'networkidle2' });
   await snap('admin_08_materials.png');
 
   await page.goto('http://127.0.0.1:8000/admin/lessons', { waitUntil: 'networkidle2' });
@@ -89,22 +89,22 @@ async function run() {
 
   await snap('konselor_01_dashboard.png');
 
-  await page.goto('http://127.0.0.1:8000/konselor/konseli/2/session', { waitUntil: 'networkidle2' });
+  await page.goto('http://127.0.0.1:8000/konselor/konseli/15/session', { waitUntil: 'networkidle2' });
   await snap('konselor_02_konseli_session.png');
 
-  await page.goto('http://127.0.0.1:8000/konselor/konseli/2/wellbeing', { waitUntil: 'networkidle2' });
+  await page.goto('http://127.0.0.1:8000/konselor/konseli/15/wellbeing', { waitUntil: 'networkidle2' });
   await snap('konselor_03_konseli_wellbeing.png');
 
-  await page.goto('http://127.0.0.1:8000/konselor/konseli/2/self-help', { waitUntil: 'networkidle2' });
+  await page.goto('http://127.0.0.1:8000/konselor/konseli/15/self-help', { waitUntil: 'networkidle2' });
   await snap('konselor_04_konseli_selfhelp.png');
 
   // Logout konselor
   await client.send('Network.clearBrowserCookies');
 
-  // 4. Konseli Pages
+  // 4. Konseli Pages (Hanif - id 15)
   console.log('Capturing konseli pages...');
   await page.goto('http://127.0.0.1:8000/login', { waitUntil: 'networkidle2' });
-  await page.type('input[name="email"], input[name="username"]', 'konseli@myresilience.com');
+  await page.type('input[name="email"], input[name="username"]', 'hanifsamsuanggarisky@gmail.com');
   await page.type('input[name="password"]', 'password');
   await Promise.all([
     page.waitForNavigation({ waitUntil: 'networkidle2' }),
@@ -125,17 +125,20 @@ async function run() {
   await page.goto('http://127.0.0.1:8000/konseli/reflection', { waitUntil: 'networkidle2' });
   await snap('konseli_05_reflection.png');
 
-  await page.goto('http://127.0.0.1:8000/konseli/tribe', { waitUntil: 'networkidle2' });
-  await snap('konseli_06_tribe_select.png');
+  await page.goto('http://127.0.0.1:8000/konseli/evaluation', { waitUntil: 'networkidle2' });
+  await snap('konseli_06_evaluation.png');
 
-  await page.goto('http://127.0.0.1:8000/konseli/self-help/2', { waitUntil: 'networkidle2' });
-  await snap('konseli_07_selfhelp_detail.png');
+  await page.goto('http://127.0.0.1:8000/konseli/tribe', { waitUntil: 'networkidle2' });
+  await snap('konseli_07_tribe_select.png');
+
+  await page.goto('http://127.0.0.1:8000/konseli/self-help/1', { waitUntil: 'networkidle2' });
+  await snap('konseli_08_selfhelp_detail.png');
 
   await page.goto('http://127.0.0.1:8000/konseli/lessons', { waitUntil: 'networkidle2' });
-  await snap('konseli_08_lessons.png');
+  await snap('konseli_09_lessons.png');
 
   await page.goto('http://127.0.0.1:8000/konseli/profile', { waitUntil: 'networkidle2' });
-  await snap('konseli_09_profile.png');
+  await snap('konseli_10_profile.png');
 
   await browser.close();
   console.log('All screenshots captured successfully!');
