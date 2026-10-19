@@ -9,7 +9,7 @@
         <div class="space-y-6">
             {{-- Brand Logo --}}
             <a href="{{ route('konseli.dashboard') }}" class="flex items-center gap-3 group">
-                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-11 h-11 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+                <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-11 h-11 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
                 <div>
                     <span class="font-display font-black text-xl text-forest-950 leading-none block">RUANG TUMBUH</span>
                     <span class="text-[10px] font-black uppercase tracking-widest text-emerald-700 block mt-1">Portal Siswa Konseli</span>
@@ -55,6 +55,14 @@
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg>
                     <span>Evaluasi Diri</span>
                 </a>
+
+                @if(!empty($hasLessons))
+                <a href="{{ route('konseli.lessons.index') }}"
+                   class="nav-rail-item {{ request()->routeIs('konseli.lessons.*') ? 'active !bg-gradient-to-r !from-emerald-600 !to-forest-800 !text-white shadow-md shadow-emerald-700/20' : 'hover:!bg-emerald-50 hover:!text-emerald-900' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    <span>Materi Pembelajaran</span>
+                </a>
+                @endif
             </nav>
         </div>
 
@@ -87,7 +95,7 @@
         {{-- Mobile Top Bar --}}
         <header class="lg:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-emerald-100 px-4 py-3 flex items-center justify-between">
             <a href="{{ route('konseli.dashboard') }}" class="flex items-center gap-2">
-                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-8 h-8 rounded-xl object-cover">
+                <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-8 h-8 rounded-xl object-cover">
                 <span class="font-display font-black text-forest-950 text-base">RUANG TUMBUH</span>
             </a>
             <div class="flex items-center gap-2">
@@ -127,7 +135,7 @@
          MOBILE FLOATING BOTTOM DOCK
          ====================================================================== --}}
     <nav class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-xl border-t border-slate-200 lg:hidden z-30 safe-bottom shadow-[0_-4px_24px_rgba(6,78,59,0.06)]">
-        <div class="grid grid-cols-6 gap-0.5 px-1 py-1.5 max-w-md mx-auto">
+        <div class="grid {{ !empty($hasLessons) ? 'grid-cols-7' : 'grid-cols-6' }} gap-0.5 px-1 py-1.5 max-w-lg mx-auto">
             <a href="{{ route('konseli.dashboard') }}" class="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-xl text-[10px] font-bold {{ request()->routeIs('konseli.dashboard') ? 'text-forest-800 bg-forest-50' : 'text-slate-400' }}">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                 <span>Beranda</span>
@@ -152,6 +160,12 @@
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg>
                 <span>Evaluasi</span>
             </a>
+            @if(!empty($hasLessons))
+            <a href="{{ route('konseli.lessons.index') }}" class="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-xl text-[10px] font-bold {{ request()->routeIs('konseli.lessons.*') ? 'text-forest-800 bg-forest-50' : 'text-slate-400' }}">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span>Materi</span>
+            </a>
+            @endif
         </div>
     </nav>
 </div>

@@ -17,7 +17,7 @@
         {{-- Brand Logo --}}
         <div class="flex justify-center mb-6">
             <a href="/" class="flex flex-col items-center gap-2 group">
-                <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform duration-300">
+                <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform duration-300">
                 <span class="font-serif text-sm font-bold text-ink-800 tracking-wider">RUANG TUMBUH</span>
             </a>
         </div>

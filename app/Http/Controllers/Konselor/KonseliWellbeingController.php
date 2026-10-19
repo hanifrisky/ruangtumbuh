@@ -25,7 +25,10 @@ class KonseliWellbeingController extends Controller
             ->with(['details.question', 'details.selectedOption', 'interpretation'])
             ->first();
 
-        return view('konselor.konseli.wellbeing', compact('user', 'preTest', 'postTest'));
+        $questions = \App\Models\Question::orderBy('order')->get();
+        $tab = request('tab', $preTest ? 'pre_test' : ($postTest ? 'post_test' : 'pre_test'));
+
+        return view('konselor.konseli.wellbeing', compact('user', 'preTest', 'postTest', 'questions', 'tab'));
     }
 
     public function reset(User $user, string $type)

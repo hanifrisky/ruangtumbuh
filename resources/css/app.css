@@ -97,6 +97,49 @@
     .nav-rail-item.active, .sidebar-light-item.active {
         @apply bg-forest-800 text-white;
     }
+
+    /* Cards */
+    .card {
+        @apply bg-white rounded-3xl border border-slate-200/90 shadow-sm transition-all duration-200;
+    }
+    .card-forest {
+        @apply bg-gradient-to-br from-forest-950 via-forest-900 to-forest-800 text-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-forest-950/20 border-2 border-emerald-500/20;
+    }
+    .card-sand {
+        @apply bg-slate-50/80 border border-slate-200/90 rounded-3xl;
+    }
+    .card-sky {
+        @apply bg-sky-50/70 border border-sky-200 rounded-3xl text-sky-950;
+    }
+    .card-program-badge {
+        @apply inline-block px-3 py-1 rounded-md bg-lime-300 text-forest-950 font-black text-xs uppercase tracking-wider shadow-sm;
+    }
+
+    .btn-success {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-forest-600 hover:bg-forest-700 text-white font-bold text-base transition-transform transition-colors duration-200 active:scale-[0.98];
+    }
+}
+
+@layer utilities {
+    .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .animate-slide-up {
+        animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Motion Layer (Staggered Entrance Reveals & Fallback) */

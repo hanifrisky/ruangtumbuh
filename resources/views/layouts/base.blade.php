@@ -7,7 +7,7 @@
     <script>document.documentElement.classList.add('js')</script>
     <title>{{ config('app.name', 'Ruang Tumbuh') }} - @yield('title', 'Ruang Bertumbuh')</title>
     <meta name="description" content="@yield('description', 'Konstruksi Model Teoritis Konseling Online Bermuatan Nilai Kearifan Lokal untuk Meningkatkan Well-Being Remaja dengan Ide Bunuh Diri.')">
-    <link rel="icon" href="{{ asset('image/logo-mark.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('image/logo-mark.png') }}?v=2" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,21 +17,6 @@
 <body class="font-sans antialiased bg-[#F8FAFC] text-slate-800 min-h-screen selection:bg-emerald-100 selection:text-forest-900" x-data="{ crisisModalOpen: false, breathingGuide: false }">
     @yield('body')
 
-    {{-- ======================================================================
-         LAPIS KESELAMATAN GLOBAL: FLOATING CRISIS & EMERGENCY PILL
-         ====================================================================== --}}
-    <div class="hidden sm:flex fixed bottom-6 right-6 z-40 items-center gap-2 print:hidden">
-        <button type="button"
-                @click="crisisModalOpen = true"
-                class="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold tracking-wide transition-colors duration-200 active:scale-95 focus:outline-none focus:ring-4 focus:ring-rose-400/40"
-                aria-label="Bantuan Krisis & Darurat 24 Jam">
-            <span class="relative flex h-2.5 w-2.5">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-200 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
-            </span>
-            <span>Butuh Bantuan Segera?</span>
-        </button>
-    </div>
 
     {{-- Modal Bantuan Krisis & Ruang Tenang --}}
     <div x-show="crisisModalOpen"

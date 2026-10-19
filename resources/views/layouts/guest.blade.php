@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Ruang Tumbuh') }} - Masuk & Daftar</title>
 
-        <link rel="icon" href="{{ asset('image/logo-mark.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('image/logo-mark.png') }}?v=2" type="image/png">
         <!-- Fonts: Archivo & Plus Jakarta Sans -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
                 {{-- Top Brand --}}
                 <div class="relative z-10">
                     <a href="/" class="inline-flex items-center gap-3 group">
-                        <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover bg-white shadow-lg shadow-black/20 group-hover:scale-105 transition-transform">
+                        <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover bg-white shadow-lg shadow-black/20 group-hover:scale-105 transition-transform">
                         <div>
                             <span class="font-display font-black text-2xl text-white block leading-tight tracking-tight">RUANG TUMBUH</span>
                             <span class="text-[10px] font-extrabold text-emerald-300 uppercase tracking-widest block">BK FIP Universitas Negeri Malang</span>
@@ -83,7 +83,7 @@
                 {{-- Mobile Brand Header --}}
                 <div class="lg:hidden mb-6 text-center relative z-10">
                     <a href="/" class="inline-flex flex-col items-center gap-2 group">
-                        <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover bg-white shadow-md">
+                        <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-12 h-12 rounded-2xl object-cover bg-white shadow-md">
                         <span class="font-display font-black text-xl text-forest-950 tracking-tight">RUANG TUMBUH</span>
                         <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-widest">BK FIP Universitas Negeri Malang</span>
                     </a>
@@ -94,16 +94,11 @@
                     {{ $slot }}
                 </div>
 
-                {{-- Return / Help Links --}}
+                {{-- Return Link --}}
                 <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-slate-600 relative z-10">
                     <a href="/" class="hover:text-forest-800 transition-colors flex items-center gap-1.5 py-1 px-3 rounded-full hover:bg-emerald-100/60">
                         <span>&larr;</span>
                         <span>Kembali ke Beranda</span>
-                    </a>
-                    <span class="text-slate-300">&bull;</span>
-                    <a href="https://wa.me/6281231750634" target="_blank" class="text-rose-600 hover:text-rose-700 transition-colors py-1 px-3 rounded-full hover:bg-rose-50 flex items-center gap-1">
-                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                        <span>Butuh Bantuan Krisis Segera?</span>
                     </a>
                 </div>
             </div>

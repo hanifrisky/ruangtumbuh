@@ -58,10 +58,14 @@ return new class extends Migration
                 $table->id();
                 $table->foreignId('konseli_id')->constrained('users')->cascadeOnDelete();
                 $table->foreignId('konselor_id')->constrained('users')->cascadeOnDelete();
+                $table->integer('session_number')->default(1);
                 $table->dateTime('scheduled_at')->nullable();
+                $table->string('platform', 50)->nullable()->default('Google Meet');
                 $table->string('meeting_platform', 50)->nullable()->default('Google Meet');
+                $table->string('meeting_url', 500)->nullable();
                 $table->string('meeting_link', 500)->nullable();
-                $table->string('status', 30)->default('requested'); // requested, scheduled, completed, evaluated
+                $table->string('status', 30)->default('pending'); // pending, requested, scheduled, completed, cancelled
+                $table->text('counselor_evaluation_notes')->nullable();
                 $table->text('evaluation_notes')->nullable();
                 $table->text('recommendations')->nullable();
                 $table->timestamp('evaluated_at')->nullable();
@@ -73,10 +77,12 @@ return new class extends Migration
             Schema::create('chat_messages', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('counseling_session_id')->nullable()->constrained('counseling_sessions')->cascadeOnDelete();
-                $table->foreignId('konseli_id')->constrained('users')->cascadeOnDelete();
-                $table->foreignId('konselor_id')->constrained('users')->cascadeOnDelete();
+                $table->foreignId('konseli_id')->nullable()->constrained('users')->cascadeOnDelete();
+                $table->foreignId('konselor_id')->nullable()->constrained('users')->cascadeOnDelete();
                 $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
+                $table->foreignId('receiver_id')->nullable()->constrained('users')->cascadeOnDelete();
                 $table->text('message');
+                $table->timestamp('read_at')->nullable();
                 $table->boolean('is_read')->default(false);
                 $table->timestamps();
             });
@@ -90,10 +96,14 @@ return new class extends Migration
                 $table->foreignId('konselor_id')->nullable()->constrained('users')->nullOnDelete();
                 $table->integer('session_number')->default(1);
                 $table->date('session_date')->nullable();
-                $table->text('answer_q1');
-                $table->text('answer_q2');
-                $table->text('answer_q3');
+                $table->text('answer_1')->nullable();
+                $table->text('answer_2')->nullable();
+                $table->text('answer_3')->nullable();
+                $table->text('answer_q1')->nullable();
+                $table->text('answer_q2')->nullable();
+                $table->text('answer_q3')->nullable();
                 $table->text('counselor_feedback')->nullable();
+                $table->timestamp('submitted_at')->nullable();
                 $table->timestamps();
             });
         }

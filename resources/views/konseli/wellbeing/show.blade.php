@@ -143,6 +143,28 @@
         <div class="lg:col-span-2 card p-6 sm:p-8 bg-white border border-slate-200 shadow-sm">
             <div class="min-h-[380px] flex flex-col justify-between">
                 <div>
+                    {{-- Contextual Section Banner --}}
+                    <div class="mb-4">
+                        <template x-if="currentIndex < 25">
+                            <div class="p-3 rounded-2xl bg-forest-50/70 border border-forest-200 text-xs text-forest-900 flex items-center gap-2.5">
+                                <span class="w-6 h-6 rounded-full bg-forest-800 text-white font-bold flex items-center justify-center flex-shrink-0 text-[10px]">1</span>
+                                <div>
+                                    <strong class="font-bold">Bagian 1: Psychological Well-Being (Carol D. Ryff)</strong> &bull;
+                                    <span class="text-slate-600">Pilihlah respon yang paling menggambarkan kondisimu dalam kehidupan sehari-hari.</span>
+                                </div>
+                            </div>
+                        </template>
+                        <template x-if="currentIndex >= 25">
+                            <div class="p-3 rounded-2xl bg-sky-50/70 border border-sky-200 text-xs text-sky-950 flex items-center gap-2.5">
+                                <span class="w-6 h-6 rounded-full bg-sky-700 text-white font-bold flex items-center justify-center flex-shrink-0 text-[10px]">2</span>
+                                <div>
+                                    <strong class="font-bold text-sky-900">Bagian 2: Identifikasi Diri (Kondisi 1 Bulan Terakhir)</strong> &bull;
+                                    <span class="text-slate-600">Jawablah dengan jujur apa yang kamu rasakan. Ceritamu aman, rahasia, dan dirawat dengan empati.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                         <span class="text-xs font-black text-forest-800 uppercase tracking-widest" x-text="'PERNYATAAN NO. ' + (currentIndex + 1) + ' DARI ' + totalQuestions"></span>
                         <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-100 text-forest-900 border border-slate-200" x-text="questions[currentIndex].dimension"></span>
@@ -156,7 +178,7 @@
                     <p class="text-xs font-bold text-slate-500 mb-3">Pilihlah respon yang paling sesuai dengan kondisimu:</p>
 
                     <div class="space-y-3">
-                        <template x-for="(opt, idx) in questions[currentIndex].options" :key="opt.id">
+                        <template x-for="opt in questions[currentIndex].options" :key="opt.id">
                             <label class="likert-option"
                                    :class="answers[questions[currentIndex].id]?.option_id === opt.id ? 'likert-option-active' : ''">
                                 <div class="flex items-center gap-3.5">
@@ -168,9 +190,12 @@
                                            class="w-5 h-5 text-forest-800 bg-white border-slate-300 focus:ring-forest-700" />
                                     <span class="text-sm font-bold text-slate-800" x-text="opt.label"></span>
                                 </div>
-                                <span class="w-6 h-6 rounded-full text-[11px] font-bold flex items-center justify-center transition-colors"
-                                      :class="answers[questions[currentIndex].id]?.option_id === opt.id ? 'bg-forest-800 text-white' : 'bg-slate-100 text-slate-400'"
-                                      x-text="idx + 1"></span>
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center transition-colors"
+                                     :class="answers[questions[currentIndex].id]?.option_id === opt.id ? 'bg-forest-800 text-white shadow-xs' : 'border border-slate-300 bg-white/60'">
+                                    <svg x-show="answers[questions[currentIndex].id]?.option_id === opt.id" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
                             </label>
                         </template>
                     </div>

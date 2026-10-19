@@ -43,17 +43,63 @@
                 Email: <span class="text-white">{{ $user->email }}</span>
             </p>
         </div>
-        <div class="flex flex-wrap gap-3 flex-shrink-0 relative z-10">
-            <div class="px-5 py-3 rounded-2xl bg-white/10 border border-white/20 text-center">
-                <span class="text-[10px] font-black uppercase tracking-wider text-slate-300 block">Skor Awal</span>
-                <span class="text-base font-black text-white mt-0.5 block">{{ $preTest ? $preTest->total_score . ' Poin' : 'Belum' }}</span>
-            </div>
-            <div class="px-5 py-3 rounded-2xl bg-white/10 border border-white/20 text-center">
-                <span class="text-[10px] font-black uppercase tracking-wider text-lime-300 block">Skor Sesudah</span>
-                <span class="text-base font-black text-lime-200 mt-0.5 block">{{ $postTest ? $postTest->total_score . ' Poin' : 'Belum' }}</span>
-            </div>
+        <div class="flex flex-wrap items-center gap-3 flex-shrink-0 relative z-10">
+            <a href="{{ route('konselor.konseli.wellbeing', ['user' => $user, 'tab' => 'pre_test']) }}" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-center transition-all hover:scale-[1.03] group" title="Klik untuk melihat detail diagnosa Asesmen Awal">
+                <span class="text-[10px] font-black uppercase tracking-wider text-slate-300 block group-hover:text-white">Asesmen Awal</span>
+                <span class="text-base font-black text-white mt-0.5 block">{{ $preTest ? ($preTest->well_being_score ?? $preTest->total_score) . '/125' : 'Belum' }}</span>
+                @if($preTest)
+                    <span class="text-[10px] text-emerald-200 block mt-0.5 font-bold">Ide: {{ $preTest->suicide_ideation_score ?? '-' }}/60 &rarr;</span>
+                @else
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Belum diisi</span>
+                @endif
+            </a>
+            <a href="{{ route('konselor.konseli.wellbeing', ['user' => $user, 'tab' => 'post_test']) }}" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-center transition-all hover:scale-[1.03] group" title="Klik untuk melihat detail diagnosa Asesmen Sesudah">
+                <span class="text-[10px] font-black uppercase tracking-wider text-lime-300 block group-hover:text-lime-200">Asesmen Sesudah</span>
+                <span class="text-base font-black text-lime-200 mt-0.5 block">{{ $postTest ? ($postTest->well_being_score ?? $postTest->total_score) . '/125' : 'Belum' }}</span>
+                @if($postTest)
+                    <span class="text-[10px] text-lime-200 block mt-0.5 font-bold">Ide: {{ $postTest->suicide_ideation_score ?? '-' }}/60 &rarr;</span>
+                @else
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Belum diisi</span>
+                @endif
+            </a>
+            <a href="{{ route('konselor.konseli.wellbeing', $user) }}" class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-lime-300 hover:bg-lime-200 text-forest-950 font-black text-xs uppercase tracking-wider shadow-sm transition-all hover:scale-[1.02]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Lihat Detail Diagnosa & Butir &rarr;</span>
+            </a>
         </div>
     </div>
+
+    {{-- Crisis / Priority Alert Banner for Counselor --}}
+    @php
+        $sessionCrisis = ($preTest && $preTest->is_crisis) || ($postTest && $postTest->is_crisis);
+        $sessionPriority = ($preTest && $preTest->is_selective_priority);
+    @endphp
+    @if($sessionCrisis)
+        <div class="p-4 sm:p-5 rounded-2xl bg-rose-50 border-2 border-rose-400 text-rose-950 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+            <div class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-xl bg-rose-200 text-rose-800 flex items-center justify-center flex-shrink-0 font-bold text-sm">⚠</span>
+                <div>
+                    <h5 class="font-bold text-sm text-rose-900 uppercase tracking-wide">Peringatan Klinis: Risiko Ide Bunuh Diri Terindikasi</h5>
+                    <p class="text-xs text-rose-800 mt-0.5 leading-relaxed">
+                        Konseli memerlukan pendampingan segera pada sesi ini. Terapkan protokol keselamatan (*safety planning*) dan koordinasi rujukan bila diperlukan.
+                    </p>
+                </div>
+            </div>
+            <a href="{{ route('konselor.konseli.wellbeing', $user) }}" class="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs rounded-xl whitespace-nowrap self-start sm:self-auto transition-colors">
+                Tinjau Rincian Asesmen &rarr;
+            </a>
+        </div>
+    @elseif($sessionPriority)
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div>
+                <strong class="font-bold text-amber-900">Prioritas Skrining Selektif:</strong>
+                <span>Skor Well-Being konseli (&le; 80) menandakan kebutuhan penguatan pada dimensi penerimaan diri, otonomi, atau relasi.</span>
+            </div>
+            <a href="{{ route('konselor.konseli.wellbeing', $user) }}" class="text-xs font-bold text-amber-900 underline whitespace-nowrap">
+                Lihat Profil Dimensi
+            </a>
+        </div>
+    @endif
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {{-- Left Column (5 cols): Form Jadwal & Link Google Meet / Zoom (FR-06) --}}
@@ -147,9 +193,15 @@
                         <h4 class="font-display text-lg font-black text-forest-950 uppercase tracking-tight">Ruang Percakapan Terbimbing</h4>
                         <p class="text-xs text-slate-500 mt-0.5 font-medium">Diskusikan kesepakatan jadwal dan harapan sesi bersama {{ $user->name }}</p>
                     </div>
-                    <span class="px-3 py-1 rounded-full bg-forest-100 border border-forest-300 text-forest-900 text-[11px] font-black flex items-center gap-1.5 uppercase tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-forest-600 animate-pulse"></span> Sesi Terbuka
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('konselor.konseli.wellbeing', $user) }}" class="px-3 py-1.5 rounded-full bg-forest-50 hover:bg-forest-100 border border-forest-200 text-forest-900 text-xs font-bold transition-colors inline-flex items-center gap-1.5 shadow-2xs">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Hasil Instrumen
+                        </a>
+                        <span class="px-3 py-1 rounded-full bg-forest-100 border border-forest-300 text-forest-900 text-[11px] font-black flex items-center gap-1.5 uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-forest-600 animate-pulse"></span> Sesi Terbuka
+                        </span>
+                    </div>
                 </div>
 
                 <div class="p-5 sm:p-6 space-y-4 max-h-[420px] min-h-[300px] overflow-y-auto bg-slate-50/50">

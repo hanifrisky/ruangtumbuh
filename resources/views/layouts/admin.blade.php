@@ -7,7 +7,7 @@
         <div>
             <div class="flex items-center justify-between gap-3 px-6 py-5 border-b border-emerald-100">
                 <div class="flex items-center gap-3 min-w-0">
-                    <img src="{{ asset('image/logo-mark.png') }}" alt="RUANG TUMBUH" class="w-10 h-10 rounded-2xl object-cover shadow-sm border border-emerald-100 flex-shrink-0">
+                    <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="RUANG TUMBUH" class="w-10 h-10 rounded-2xl object-cover shadow-sm border border-emerald-100 flex-shrink-0">
                     <div class="min-w-0">
                         <h1 class="font-display font-black text-lg text-forest-950 leading-tight truncate">RUANG TUMBUH</h1>
                         <p class="text-[10px] font-black text-emerald-700 uppercase tracking-wider truncate">Panel Admin</p>

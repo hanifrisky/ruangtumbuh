@@ -52,29 +52,50 @@ class WellbeingAnswer extends Model
     /**
      * Hitung Skor Well-Being (Skala 25 - 125)
      */
-    public function getComputedWellBeingScore(): int
+    public function getComputedWellBeingScoreAttribute(): int
     {
         if ($this->well_being_score !== null) {
-            return $this->well_being_score;
+            return (int) $this->well_being_score;
         }
 
-        return $this->details
-            ->filter(fn ($d) => ($d->question->category ?? 'well_being') === 'well_being')
-            ->sum('score');
+        if ($this->relationLoaded('details') || $this->details()->exists()) {
+            $sum = (int) $this->details
+                ->filter(fn ($d) => ($d->question->category ?? 'well_being') === 'well_being')
+                ->sum('score');
+            if ($sum > 0) {
+                return $sum;
+            }
+        }
+
+        return (int) ($this->total_score ?? 0);
+    }
+
+    public function getComputedWellBeingScore(): int
+    {
+        return $this->getComputedWellBeingScoreAttribute();
     }
 
     /**
      * Hitung Skor Ide Bunuh Diri (Skala 12 - 60)
      */
-    public function getComputedSuicideScore(): int
+    public function getComputedSuicideScoreAttribute(): int
     {
         if ($this->suicide_ideation_score !== null) {
-            return $this->suicide_ideation_score;
+            return (int) $this->suicide_ideation_score;
         }
 
-        return $this->details
-            ->filter(fn ($d) => ($d->question->category ?? '') === 'suicide_ideation')
-            ->sum('score');
+        if ($this->relationLoaded('details') || $this->details()->exists()) {
+            return (int) $this->details
+                ->filter(fn ($d) => ($d->question->category ?? '') === 'suicide_ideation')
+                ->sum('score');
+        }
+
+        return 0;
+    }
+
+    public function getComputedSuicideScore(): int
+    {
+        return $this->getComputedSuicideScoreAttribute();
     }
 
     /**

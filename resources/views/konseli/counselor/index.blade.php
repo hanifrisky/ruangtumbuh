@@ -17,38 +17,44 @@
     }
 }">
     {{-- Header Banner in 30% Deep Green --}}
-    <div class="card-forest p-7 sm:p-9 relative overflow-hidden">
+    <div class="relative overflow-hidden p-7 sm:p-9 rounded-[2rem] bg-gradient-to-br from-forest-950 via-forest-900 to-emerald-950 text-white border-2 border-emerald-500/20 shadow-xl shadow-forest-950/20">
+        {{-- Decorative Glow Blobs --}}
+        <div class="absolute -top-16 -left-16 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-lime-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
             <div class="space-y-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-emerald-200 text-xs font-bold uppercase tracking-wider">
-                    Langkah 3 • Direktori 12 Konselor Ahli
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-xs font-black uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                    <span>Langkah 3 • Direktori 12 Konselor Ahli</span>
                 </span>
-                <h2 class="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight">
+                <h2 class="font-display text-2xl sm:text-3xl font-black text-white tracking-tight">
                     Pilih Konselor Pendamping Kamu
                 </h2>
-                <p class="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed font-light">
+                <p class="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed font-normal">
                     Pilihlah konselor yang membuatmu merasa nyaman untuk bercerita. Seluruh konselor Ruang Tumbuh adalah akademisi dan praktisi Bimbingan & Konseling profesional yang siap mendampingimu.
                 </p>
             </div>
             @if($selectedCounselorId)
-                <a href="{{ route('konseli.counseling.index') }}" class="btn-sky py-3 px-6 text-xs flex-shrink-0 font-bold">
+                <a href="{{ route('konseli.counseling.index') }}" class="btn-sky py-3 px-6 text-xs flex-shrink-0 font-bold shadow-md shadow-sky-600/30">
                     Buka Chat & Jadwal &rarr;
                 </a>
             @endif
         </div>
 
         {{-- Search Bar --}}
-        <div class="mt-6 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="relative z-10 mt-6 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="relative flex-1 max-w-md">
                 <input type="text"
                        x-model="searchQuery"
                        placeholder="Cari nama konselor atau pesan penguat..."
-                       class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/15 border border-white/20 text-white placeholder-emerald-200 text-xs sm:text-sm focus:bg-white focus:text-slate-900 focus:placeholder-slate-400 focus:outline-none transition-all" />
+                       class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-emerald-200/70 text-xs sm:text-sm focus:bg-white focus:text-slate-900 focus:placeholder-slate-400 focus:outline-none transition-all shadow-inner" />
                 <svg class="w-4 h-4 text-emerald-200 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
-            <span class="text-xs font-bold text-emerald-200">
-                12 Konselor Profesional BK FIP UM Tersedia
-            </span>
+            <div class="flex items-center gap-2 text-xs font-bold text-emerald-200 bg-white/10 px-3.5 py-2 rounded-xl border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>{{ $counselors->count() }} Konselor Profesional BK FIP UM Tersedia</span>
+            </div>
         </div>
     </div>
 
@@ -75,29 +81,36 @@
                 @endphp
                 {{-- 60% White Card with Green Active State --}}
                 <div x-show="!searchQuery || '{{ addslashes($searchText) }}'.includes(searchQuery.toLowerCase())"
-                     class="card p-6 flex flex-col justify-between bg-white relative transition-all duration-300 hover:-translate-y-1 border-2 {{ $isSelected ? 'border-forest-700 ring-4 ring-forest-700/10' : 'border-slate-200 hover:border-forest-500' }}">
-
-                    @if($isSelected)
-                        <div class="absolute top-4 right-4 inline-flex items-center gap-1 bg-forest-800 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                            ✓ Konselor Pilihanmu
-                        </div>
-                    @endif
+                     class="card p-6 flex flex-col justify-between bg-white transition-all duration-300 hover:-translate-y-1 border-2 {{ $isSelected ? 'border-forest-700 ring-4 ring-forest-700/15 bg-forest-50/20 shadow-md' : 'border-slate-200 hover:border-forest-500 hover:shadow-md' }}">
 
                     <div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-forest-900 to-forest-800 border-2 border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center font-sans font-black text-white text-xl shadow-md">
+                        {{-- Card Top Meta Bar: Number on Left, Selected Badge on Right --}}
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-forest-800 bg-forest-50 px-2.5 py-1 rounded-lg border border-forest-200">
+                                Konselor #{{ $profile->order_number ?? ($index + 1) }}
+                            </span>
+                            @if($isSelected)
+                                <span class="inline-flex items-center gap-1.5 bg-gradient-to-r from-forest-800 to-forest-900 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm border border-forest-700/50">
+                                    <svg class="w-3.5 h-3.5 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                    <span>Konselor Pilihanmu</span>
+                                </span>
+                            @endif
+                        </div>
+
+                        {{-- Avatar & Identity --}}
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-gradient-to-br from-forest-900 to-forest-800 border-2 border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center font-sans font-black text-white text-xl shadow-md">
                                 @if($photoUrl)
                                     <img src="{{ $photoUrl }}" alt="Foto {{ $counselor->name }}" class="w-full h-full object-cover object-top">
                                 @else
-                                    {{ strtoupper(substr(preg_replace('/^(Prof\.|Dr\.|M\.|Muh\.)\s*/i', '', $counselor->name), 0, 2)) }}
+                                    <svg class="w-8 h-8 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
                                 @endif
                             </div>
-                            <div class="min-w-0 {{ $isSelected ? 'pr-28' : '' }}">
-                                <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-forest-800 bg-forest-50 px-2 py-0.5 rounded-md border border-forest-200 mb-1">
-                                    Konselor #{{ $profile->order_number ?? ($index + 1) }}
-                                </span>
-                                <h4 class="font-sans font-bold text-slate-900 text-sm sm:text-base leading-snug">{{ $counselor->name }}</h4>
-                                <p class="text-[11px] font-bold text-emerald-700 mt-0.5 flex items-center gap-1">
+                            <div class="min-w-0 flex-1">
+                                <h4 class="font-sans font-bold text-slate-900 text-sm sm:text-base leading-snug break-words">{{ $counselor->name }}</h4>
+                                <p class="text-[11px] font-bold text-emerald-700 mt-1 flex items-center gap-1.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                                     <span>Siap Mendampingi</span>
                                 </p>
@@ -120,7 +133,7 @@
 
                     <div class="space-y-2 mt-6 pt-4 border-t border-slate-200">
                         @if($isSelected)
-                            <a href="{{ route('konseli.counseling.index') }}" class="w-full btn-success py-3 text-xs font-black uppercase tracking-wider text-center block">
+                            <a href="{{ route('konseli.counseling.index') }}" class="w-full btn-primary py-3 text-xs font-black uppercase tracking-wider text-center block shadow-md shadow-forest-900/15">
                                 Buka Chat & Jadwal Sesi &rarr;
                             </a>
                         @else

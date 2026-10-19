@@ -36,6 +36,10 @@
 
     {{-- 30% Green Master Live Session Ticket (Sticky Meeting Banner) --}}
     <div class="card-forest p-6 sm:p-7 relative overflow-hidden">
+        {{-- Decorative Glow Blobs --}}
+        <div class="absolute -top-16 -left-16 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-lime-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
         <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div class="space-y-2">
                 <div class="flex flex-wrap items-center gap-2">

@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             CounselorSeeder::class,
             WellbeingQuestionSeeder::class,
-            ResilienceSelfHelpSeeder::class,
         ]);
     }
 }

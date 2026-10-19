@@ -9,10 +9,13 @@ class ChatMessage extends Model
 {
     protected $fillable = [
         'counseling_session_id',
+        'konseli_id',
+        'konselor_id',
         'sender_id',
         'receiver_id',
         'message',
         'read_at',
+        'is_read',
     ];
 
     protected function casts(): array
@@ -20,6 +23,19 @@ class ChatMessage extends Model
         return [
             'read_at' => 'datetime',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (ChatMessage $message) {
+            if ($message->counseling_session_id && (! $message->konseli_id || ! $message->konselor_id)) {
+                $session = CounselingSession::find($message->counseling_session_id);
+                if ($session) {
+                    $message->konseli_id = $message->konseli_id ?? $session->konseli_id;
+                    $message->konselor_id = $message->konselor_id ?? $session->konselor_id;
+                }
+            }
+        });
     }
 
     public function session(): BelongsTo

@@ -15,7 +15,7 @@
             {{-- Brand Logo --}}
             <a href="/" class="flex items-center gap-3 group">
                 <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-forest-800 to-emerald-500 p-0.5 shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <img src="{{ asset('image/logo-mark.png') }}" alt="Logo Ruang Tumbuh" class="w-full h-full rounded-[14px] object-cover bg-white">
+                    <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="Logo Ruang Tumbuh" class="w-full h-full rounded-[14px] object-cover bg-white">
                 </div>
                 <div>
                     <span class="font-display font-black text-xl sm:text-2xl text-forest-950 tracking-tight leading-none block">RUANG TUMBUH</span>
@@ -34,11 +34,6 @@
 
             {{-- Actions --}}
             <div class="flex items-center gap-2.5">
-                <button type="button" 
-                        @click="crisisModalOpen = true" 
-                        class="inline-flex sm:hidden px-3 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-sm">
-                    Bantuan Krisis
-                </button>
                 @auth
                     <a href="{{ route('dashboard') }}" class="btn-primary py-2.5 px-5 text-xs sm:text-sm rounded-full shadow-md shadow-forest-800/20">
                         Buka Dashboard &rarr;
@@ -647,7 +642,7 @@
                 <div class="md:col-span-5 space-y-4">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-white p-0.5">
-                            <img src="{{ asset('image/logo-mark.png') }}" alt="Ruang Tumbuh" class="w-full h-full rounded-lg object-cover">
+                            <img src="{{ asset('image/logo-mark.png') }}?v=2" alt="Ruang Tumbuh" class="w-full h-full rounded-lg object-cover">
                         </div>
                         <span class="font-display font-black text-2xl text-white tracking-tight">RUANG TUMBUH</span>
                     </div>

@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
     {
         // 1. Akun Administrator
         User::updateOrCreate(
-            ['email' => 'admin@myresilience.com'],
+            ['email' => 'admin@ruangtumbuh.com'],
             [
                 'name' => 'Administrator Ruang Tumbuh',
                 'username' => 'admin',
@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
 
         // 2. Akun Contoh Konseli (Siswa)
         User::updateOrCreate(
-            ['email' => 'konseli@myresilience.com'],
+            ['email' => 'konseli@ruangtumbuh.com'],
             [
                 'name' => 'Andi Wijaya',
                 'username' => 'andi.wijaya',

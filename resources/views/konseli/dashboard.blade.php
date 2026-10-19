@@ -96,6 +96,31 @@
         </div>
     @endif
 
+    {{-- Card Edukasi / Materi Pembelajaran (Jika materi tersedia) --}}
+    @if(!empty($hasLessons))
+        <div class="card p-6 bg-gradient-to-r from-emerald-50 via-white to-forest-50/40 border-2 border-emerald-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-forest-800 text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-forest-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300">
+                        ● Materi Psikoedukasi & Pembelajaran
+                    </span>
+                    <h4 class="font-sans text-lg font-bold text-slate-900">
+                        Materi & Modul Ketangguhan Jiwa
+                    </h4>
+                    <p class="text-xs text-slate-600">
+                        Akses modul, video pembelajaran, dan panduan resiliensi yang disiapkan oleh konselor pendamping untuk mendukung proses bertumbuhmu.
+                    </p>
+                </div>
+            </div>
+            <a href="{{ route('konseli.lessons.index') }}" class="btn-primary py-3 px-6 text-xs w-full sm:w-auto text-center flex-shrink-0 whitespace-nowrap">
+                Buka Materi Pembelajaran &rarr;
+            </a>
+        </div>
+    @endif
+
     {{-- Interactive 8-Step Service Journey Cards (60% White Base) --}}
     <div class="space-y-4">
         <div class="flex items-center justify-between">
@@ -103,19 +128,57 @@
                 <span class="text-[10px] font-black uppercase tracking-widest text-forest-700 block">Jalur Bertumbuh</span>
                 <h3 class="font-sans text-xl font-black text-slate-900">Tahapan Layanan Ruang Tumbuh</h3>
             </div>
-            <span class="text-xs font-bold text-slate-500">Langkah 1 & 2 telah terselesaikan</span>
+            <span class="text-xs font-bold text-forest-800 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-full">
+                8 Tahapan Layanan Terpadu
+            </span>
         </div>
 
         <div class="grid grid-cols-1 gap-4">
+            {{-- Langkah 1: Registrasi Akun --}}
+            <div class="card p-6 flex items-start gap-4 border-2 border-emerald-200 bg-emerald-50/20">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-sans font-black text-sm bg-forest-800 text-white">
+                    ✓
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2">
+                        <h4 class="font-sans text-base font-bold text-slate-900">Langkah 1: Registrasi Akun Konseli</h4>
+                        <span class="text-xs font-bold px-3 py-0.5 rounded-full bg-emerald-100 text-forest-800 border border-emerald-300">
+                            Selesai Dilakukan
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                        Pendaftaran akun baru konseli atas nama <strong class="text-slate-900">{{ $user->name }}</strong> ({{ $user->email }}) telah berhasil tercatat di sistem.
+                    </p>
+                </div>
+            </div>
+
+            {{-- Langkah 2: Masuk Melalui Menu Log-in --}}
+            <div class="card p-6 flex items-start gap-4 border-2 border-emerald-200 bg-emerald-50/20">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-sans font-black text-sm bg-forest-800 text-white">
+                    ✓
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2">
+                        <h4 class="font-sans text-base font-bold text-slate-900">Langkah 2: Masuk Melalui Menu Log-in</h4>
+                        <span class="text-xs font-bold px-3 py-0.5 rounded-full bg-emerald-100 text-forest-800 border border-emerald-300">
+                            Selesai Masuk Portal
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                        Akses autentikasi berhasil, kamu kini telah berada di dalam dasbor pribadi konseli Ruang Tumbuh.
+                    </p>
+                </div>
+            </div>
+
             {{-- Langkah 3: Pilih Konselor --}}
             <div class="card p-6 flex items-start gap-4 border-2 {{ $counselorSelected ? 'border-emerald-200 bg-emerald-50/20' : 'border-forest-600 ring-4 ring-forest-600/10' }}">
-                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-sans font-black text-sm {{ $counselorSelected ? 'bg-forest-800 text-white' : 'bg-slate-100 text-slate-700' }}">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-sans font-black text-sm {{ $counselorSelected ? 'bg-forest-800 text-white' : 'bg-forest-800 text-white shadow-md shadow-forest-800/30' }}">
                     {{ $counselorSelected ? '✓' : '3' }}
                 </div>
                 <div class="flex-1 min-w-0">
                     <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2">
                         <h4 class="font-sans text-base font-bold text-slate-900">Langkah 3: Memilih Konselor Pendamping</h4>
-                        <span class="text-xs font-bold px-3 py-0.5 rounded-full {{ $counselorSelected ? 'bg-emerald-100 text-forest-800 border border-emerald-300' : 'bg-slate-100 text-slate-700' }}">
+                        <span class="text-xs font-bold px-3 py-0.5 rounded-full {{ $counselorSelected ? 'bg-emerald-100 text-forest-800 border border-emerald-300' : 'bg-forest-100 text-forest-900 border border-forest-300 animate-pulse' }}">
                             {{ $counselorSelected ? 'Selesai Dipilih' : 'Tahap Saat Ini' }}
                         </span>
                     </div>
@@ -148,11 +211,11 @@
                     <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2">
                         <h4 class="font-sans text-base font-bold text-slate-900">Langkah 4: Instrumen Well-Being & Ide Bunuh Diri (Awal)</h4>
                         <span class="text-xs font-bold px-3 py-0.5 rounded-full {{ $preTestCompleted ? 'bg-emerald-100 text-forest-800 border border-emerald-300' : 'bg-slate-100 text-slate-700' }}">
-                            {{ $preTestCompleted ? 'Selesai (' . $preTest->total_score . ' Poin)' : 'Belum Selesai' }}
+                            {{ $preTestCompleted ? 'Selesai (' . ($preTest->well_being_score ?? $preTest->total_score) . '/125 Poin)' : 'Belum Selesai' }}
                         </span>
                     </div>
                     <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                        Pemetaan 6 dimensi kesejahteraan psikologis dan daya lenting awal diri sebelum sesi konseling daring.
+                        Pemetaan 6 dimensi kesejahteraan psikologis (Carol D. Ryff) dan identifikasi diri sebelum sesi konseling daring.
                     </p>
                     <div class="mt-4 flex flex-wrap gap-2.5">
                         <a href="{{ route('konseli.wellbeing.index') }}" class="{{ $preTestCompleted ? 'btn-secondary' : 'btn-primary' }} text-xs px-4 py-2">
@@ -220,9 +283,9 @@
                 </div>
                 <div class="flex-1 min-w-0">
                     <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2">
-                        <h4 class="font-sans text-base font-bold text-slate-900">Langkah 7: Mengisi Instrumen Well-Being (Sesudah Konseling)</h4>
+                        <h4 class="font-sans text-base font-bold text-slate-900">Langkah 7: Mengisi Instrumen Well-Being & Ide Bunuh Diri (Sesudah)</h4>
                         <span class="text-xs font-bold px-3 py-0.5 rounded-full {{ $postTestCompleted ? 'bg-emerald-100 text-forest-800 border border-emerald-300' : 'bg-slate-100 text-slate-700' }}">
-                            {{ $postTestCompleted ? 'Selesai (' . $postTest->total_score . ' Poin)' : 'Menunggu Sesi' }}
+                            {{ $postTestCompleted ? 'Selesai (' . ($postTest->well_being_score ?? $postTest->total_score) . '/125 Poin)' : 'Menunggu Sesi' }}
                         </span>
                     </div>
                     <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
@@ -232,6 +295,11 @@
                         <a href="{{ route('konseli.wellbeing.index') }}" class="{{ $postTestCompleted ? 'btn-secondary' : 'btn-primary' }} text-xs px-4 py-2">
                             {{ $postTestCompleted ? 'Lihat Hasil Sesudah Konseling' : 'Buka Asesmen Sesudah' }}
                         </a>
+                        @if($postTestCompleted)
+                            <a href="{{ route('konseli.wellbeing.pdf', 'post_test') }}" target="_blank" class="btn-primary text-xs px-4 py-2">
+                                Unduh Hasil (PDF)
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
