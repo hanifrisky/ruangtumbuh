@@ -216,7 +216,7 @@
                                         {{ $isMe ? 'Anda (Konselor)' : $user->name }}
                                     </span>
                                     <span class="text-[10px] {{ $isMe ? 'text-slate-300' : 'text-slate-400' }}">
-                                        {{ $msg->created_at->format('d M • H:i') }} WIB
+                                        {{ $msg->created_at->timezone('Asia/Jakarta')->format('d M • H:i') }} WIB
                                     </span>
                                 </div>
                                 <p class="text-xs sm:text-sm leading-relaxed whitespace-pre-line font-medium">{{ $msg->message }}</p>
@@ -274,7 +274,7 @@
                             <span class="font-black text-forest-900 bg-forest-100 px-3 py-1 rounded-full border border-forest-300 text-xs uppercase tracking-wider">
                                 ✓ Refleksi Selesai Sesi
                             </span>
-                            <span class="text-xs font-bold text-slate-500">{{ $ref->submitted_at ? $ref->submitted_at->format('d M Y • H:i') : '' }} WIB</span>
+                            <span class="text-xs font-bold text-slate-500">{{ $ref->submitted_at ? $ref->submitted_at->timezone('Asia/Jakarta')->format('d M Y • H:i') : '' }} WIB</span>
                         </div>
                         <div>
                             <p class="font-black text-forest-950">1. Pemahaman baru tentang pikiran, perasaan, atau cara memandang masalah:</p>

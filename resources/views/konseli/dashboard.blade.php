@@ -83,7 +83,7 @@
                         ● Sesi Konseling Terjadwal
                     </span>
                     <h4 class="font-sans text-lg font-bold text-slate-900">
-                        {{ $activeSession->scheduled_at ? $activeSession->scheduled_at->format('d F Y • H:i') . ' WIB' : 'Sesi Aktif' }}
+                        {{ $activeSession->scheduled_at ? $activeSession->scheduled_at->timezone('Asia/Jakarta')->format('d F Y • H:i') . ' WIB' : 'Sesi Aktif' }}
                     </h4>
                     <p class="text-xs text-slate-600">
                         Platform: <strong>{{ $activeSession->platform ?? 'Google Meet / Zoom' }}</strong> bersama <strong>{{ $activeSession->konselor->name ?? 'Konselor' }}</strong>

@@ -118,7 +118,7 @@
                             ✓ Refleksi Tersimpan
                         </span>
                         <span class="text-xs text-slate-500 font-bold">
-                            {{ $ref->submitted_at ? $ref->submitted_at->format('d M Y • H:i') : $ref->created_at->format('d M Y • H:i') }} WIB
+                            {{ $ref->submitted_at ? $ref->submitted_at->timezone('Asia/Jakarta')->format('d M Y • H:i') : $ref->created_at->timezone('Asia/Jakarta')->format('d M Y • H:i') }} WIB
                         </span>
                     </div>
 

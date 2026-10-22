@@ -59,7 +59,7 @@
 
                 @if($session->scheduled_at || $session->meeting_url)
                     <h3 class="font-sans text-xl sm:text-2xl font-black text-white">
-                        {{ $session->scheduled_at ? $session->scheduled_at->format('d F Y • H:i') . ' WIB' : 'Jadwal Konseling Online' }}
+                        {{ $session->scheduled_at ? $session->scheduled_at->timezone('Asia/Jakarta')->format('d F Y • H:i') . ' WIB' : 'Jadwal Konseling Online' }}
                     </h3>
                     <p class="text-xs sm:text-sm text-emerald-100">
                         Platform: <strong class="text-white">{{ $session->platform ?? 'Google Meet / Zoom' }}</strong> bersama <strong>{{ $konselor->name }}</strong>
@@ -158,7 +158,7 @@
                                     {{ $isMe ? 'Kamu' : ($konselor->name ?? 'Konselor') }}
                                 </span>
                                 <span class="text-[10px] {{ $isMe ? 'text-emerald-200' : 'text-slate-400' }}">
-                                    {{ $msg->created_at->format('d M • H:i') }} WIB
+                                    {{ $msg->created_at->timezone('Asia/Jakarta')->format('d M • H:i') }} WIB
                                 </span>
                             </div>
                             <p class="text-xs sm:text-sm leading-relaxed whitespace-pre-line">{{ $msg->message }}</p>
