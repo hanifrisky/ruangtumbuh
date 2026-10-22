@@ -204,10 +204,10 @@
                     </div>
                 </div>
 
-                <div class="p-5 sm:p-6 space-y-4 max-h-[420px] min-h-[300px] overflow-y-auto bg-slate-50/50">
+                <div class="p-5 sm:p-6 space-y-4 max-h-[420px] min-h-[300px] overflow-y-auto bg-slate-50/50" id="chat-messages-container">
                     @forelse($session->messages as $msg)
                         @php
-                            $isMe = $msg->sender_id === auth()->id();
+                            $isMe = (int) $msg->sender_id === (int) auth()->id();
                         @endphp
                         <div class="flex {{ $isMe ? 'justify-end' : 'justify-start' }}">
                             <div class="max-w-[82%] rounded-2xl px-4 py-3 shadow-sm {{ $isMe ? 'bg-forest-950 text-white rounded-br-none' : 'bg-white border-2 border-slate-200 text-slate-800 rounded-bl-none' }}">
@@ -296,4 +296,15 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const container = document.getElementById('chat-messages-container');
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
+    });
+</script>
+@endpush
 @endsection

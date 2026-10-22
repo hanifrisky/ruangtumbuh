@@ -73,7 +73,7 @@
                                         <a href="{{ route('admin.users.edit', $user) }}" class="btn-secondary btn-sm">
                                             Edit
                                         </a>
-                                        @if($user->id !== auth()->id())
+                                        @if((int) $user->id !== (int) auth()->id())
                                             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.')">
                                                 @csrf
                                                 @method('DELETE')

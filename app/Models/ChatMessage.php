@@ -21,6 +21,13 @@ class ChatMessage extends Model
     protected function casts(): array
     {
         return [
+            'id' => 'integer',
+            'counseling_session_id' => 'integer',
+            'konseli_id' => 'integer',
+            'konselor_id' => 'integer',
+            'sender_id' => 'integer',
+            'receiver_id' => 'integer',
+            'is_read' => 'boolean',
             'read_at' => 'datetime',
         ];
     }

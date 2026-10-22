@@ -149,13 +149,13 @@
             <div class="p-5 space-y-3.5 max-h-[420px] min-h-[320px] overflow-y-auto bg-slate-50/50" id="chat-messages-container">
                 @forelse($session->messages as $msg)
                     @php
-                        $isMe = $msg->sender_id === auth()->id();
+                        $isMe = (int) $msg->sender_id === (int) auth()->id();
                     @endphp
                     <div class="flex {{ $isMe ? 'justify-end' : 'justify-start' }}">
                         <div class="max-w-[85%] sm:max-w-[75%] rounded-3xl px-5 py-3.5 shadow-sm {{ $isMe ? 'bg-forest-800 text-white rounded-br-sm' : 'bg-white border border-slate-200 text-slate-900 rounded-bl-sm' }}">
                             <div class="flex items-center justify-between gap-3 mb-1">
                                 <span class="text-[10px] font-black uppercase tracking-wider {{ $isMe ? 'text-emerald-200' : 'text-forest-800' }}">
-                                    {{ $isMe ? 'Kamu' : $konselor->name }}
+                                    {{ $isMe ? 'Kamu' : ($konselor->name ?? 'Konselor') }}
                                 </span>
                                 <span class="text-[10px] {{ $isMe ? 'text-emerald-200' : 'text-slate-400' }}">
                                     {{ $msg->created_at->format('d M • H:i') }} WIB
