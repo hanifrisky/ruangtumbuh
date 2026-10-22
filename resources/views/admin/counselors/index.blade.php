@@ -31,8 +31,8 @@
                             {{-- Photo and basic info --}}
                             <div class="flex items-start gap-3.5 sm:gap-4">
                                 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 border border-slate-100 overflow-hidden flex-shrink-0 flex items-center justify-center font-bold text-blue-600 text-xl shadow-sm">
-                                    @if($profile && $profile->photo_path)
-                                        <img src="{{ asset('storage/' . $profile->photo_path) }}" alt="Foto {{ $counselor->name }}" class="w-full h-full object-cover">
+                                    @if($profile && $profile->photo_url)
+                                        <img src="{{ $profile->photo_url }}" alt="Foto {{ $counselor->name }}" class="w-full h-full object-cover">
                                     @else
                                         {{ strtoupper(substr($counselor->name, 0, 2)) }}
                                     @endif

@@ -40,4 +40,18 @@ class CounselorProfile extends Model
         }
         return "https://wa.me/{$number}";
     }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        if (! $this->photo_path) {
+            return null;
+        }
+
+        // Direct public file check (legacy/seeders)
+        if (file_exists(public_path($this->photo_path))) {
+            return asset($this->photo_path);
+        }
+
+        return asset('storage/' . $this->photo_path);
+    }
 }

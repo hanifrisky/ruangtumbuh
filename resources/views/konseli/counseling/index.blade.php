@@ -94,8 +94,8 @@
                 <span class="text-[10px] font-black uppercase tracking-widest text-forest-700 block mb-3">Konselor Pendampingmu</span>
                 <div class="flex items-center gap-4">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-forest-900 to-forest-800 text-white font-sans font-black flex items-center justify-center text-xl flex-shrink-0 overflow-hidden shadow-md">
-                        @if($profile && $profile->photo_path && file_exists(public_path($profile->photo_path)))
-                            <img src="{{ asset($profile->photo_path) }}" alt="{{ $konselor->name }}" class="w-full h-full object-cover object-top">
+                        @if($profile && $profile->photo_url)
+                            <img src="{{ $profile->photo_url }}" alt="{{ $konselor->name }}" class="w-full h-full object-cover object-top">
                         @else
                             {{ strtoupper(substr($konselor->name, 0, 2)) }}
                         @endif

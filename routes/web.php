@@ -156,4 +156,18 @@ Route::middleware(['auth', 'role:konselor'])->prefix('konselor')->name('konselor
     Route::put('/profile', [\App\Http\Controllers\Konselor\ProfileController::class, 'update'])->name('profile.update');
 });
 
+// Public file access fallback for environments where symlink is restricted/broken
+Route::get('/storage/{path}', function (string $path) {
+    if (str_contains($path, '..')) {
+        abort(400);
+    }
+
+    $disk = \Illuminate\Support\Facades\Storage::disk('public');
+    if (! $disk->exists($path)) {
+        abort(404);
+    }
+
+    return $disk->response($path);
+})->where('path', '.*')->name('storage.file');
+
 require __DIR__.'/auth.php';

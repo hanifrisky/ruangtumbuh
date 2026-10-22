@@ -140,10 +140,10 @@
                 <!-- Photo -->
                 <div>
                     <label for="photo" class="form-label">Foto Profil</label>
-                    @if($profile && $profile->photo_path)
+                    @if($profile && $profile->photo_url)
                         <div class="mb-3 flex items-center gap-3">
                             <div class="w-12 h-12 rounded-xl border border-slate-200 overflow-hidden flex-shrink-0">
-                                <img src="{{ asset('storage/' . $profile->photo_path) }}" alt="Foto lama" class="w-full h-full object-cover">
+                                <img src="{{ $profile->photo_url }}" alt="Foto lama" class="w-full h-full object-cover">
                             </div>
                             <span class="text-xs text-slate-400">Foto saat ini terpasang. Unggah file baru untuk menggantinya.</span>
                         </div>

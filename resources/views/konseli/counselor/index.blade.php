@@ -69,14 +69,7 @@
                 @php
                     $profile = $counselor->counselorProfile;
                     $isSelected = $counselor->id == $selectedCounselorId;
-                    $photoUrl = null;
-                    if ($profile && $profile->photo_path) {
-                        if (file_exists(public_path($profile->photo_path))) {
-                            $photoUrl = asset($profile->photo_path);
-                        } elseif (file_exists(public_path('storage/' . $profile->photo_path))) {
-                            $photoUrl = asset('storage/' . $profile->photo_path);
-                        }
-                    }
+                    $photoUrl = $profile?->photo_url;
                     $searchText = strtolower($counselor->name . ' ' . ($profile->motto ?? '') . ' ' . ($profile->description ?? ''));
                 @endphp
                 {{-- 60% White Card with Green Active State --}}

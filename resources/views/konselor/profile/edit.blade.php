@@ -128,10 +128,10 @@
                 <!-- Photo -->
                 <div>
                     <label for="photo" class="form-label text-xs font-bold uppercase tracking-wider text-ink-700">Foto Profil</label>
-                    @if($profile && $profile->photo_path)
+                    @if($profile && $profile->photo_url)
                         <div class="mb-3 flex items-center gap-3">
                             <div class="w-14 h-14 rounded-2xl border border-sand-200 overflow-hidden flex-shrink-0">
-                                <img src="{{ asset('storage/' . $profile->photo_path) }}" alt="Foto profil" class="w-full h-full object-cover">
+                                <img src="{{ $profile->photo_url }}" alt="Foto profil" class="w-full h-full object-cover">
                             </div>
                             <span class="text-xs text-ink-400">Foto profil saat ini terpasang. Unggah berkas baru jika ingin memperbarui.</span>
                         </div>
