@@ -637,10 +637,11 @@
 
             {{-- University Logos Consortium --}}
             <div class="pt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-80">
-                <img src="{{ asset('image/logo/logo-um.webp') }}" alt="UM" class="h-12 w-auto object-contain">
-                <img src="{{ asset('image/logo/logo-unp.png') }}" alt="UNP" class="h-12 w-auto object-contain">
-                <img src="{{ asset('image/logo/logo-uny.png') }}" alt="UNY" class="h-12 w-auto object-contain">
                 <img src="{{ asset('image/logo/Diktisaintek.png') }}" alt="Diktisaintek" class="h-12 w-auto object-contain">
+            <img src="{{ asset('image/logo/logo-um.webp') }}" alt="UM" class="h-12 w-auto object-contain">
+                <img src="{{ asset('image/logo/logo-upi.webp') }}" alt="UNP" class="h-12 w-auto object-contain">
+                <img src="{{ asset('image/logo/logo-unihaz.jpg') }}" alt="UNY" class="h-12 w-auto object-contain">
+                <img src="{{ asset('image/logo/logo-unp.png') }}" alt="UNY" class="h-12 w-auto object-contain">
             </div>
 
         </div>
