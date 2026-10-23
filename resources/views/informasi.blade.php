@@ -116,13 +116,13 @@
     {{-- Seksi 2: 7 Tim Pengembang (Emerald-950 Playful Section) --}}
     @php
         $developers = [
-            ['name' => 'Prof. Dr. M. Ramli, M.A', 'role' => 'Guru Besar Bimbingan & Konseling UM'],
-            ['name' => 'Prof. Dr. Juntika Nurihsan, M.Pd', 'role' => 'Pakar Bimbingan & Konseling Indonesia'],
-            ['name' => 'Prof. Dr. Zadrian Ardi, S.Pd., M.Pd., Kons', 'role' => 'Guru Besar Bimbingan & Konseling'],
-            ['name' => 'Prof. Dr. Nur Hidayah, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling UM'],
-            ['name' => 'Dr. Nur Mega Aris Saputra, S.Pd., M.Pd', 'role' => 'Ketua Tim Peneliti & Dosen BK FIP UM'],
-            ['name' => 'Dr. Juwanto, S.Pd.I., M.Pd', 'role' => 'Dosen & Peneliti Bimbingan Konseling FIP UM'],
-            ['name' => 'Ade Herdian Putra, S.Pd., M.Pd. Kons', 'role' => 'Konselor & Tim Peneliti BK FIP UM'],
+            ['name' => 'Prof. Dr. M. Ramli, M.A', 'role' => 'Guru Besar Bimbingan & Konseling UM', 'slug' => 'ramli'],
+            ['name' => 'Prof. Dr. Juntika Nurihsan, M.Pd', 'role' => 'Pakar Bimbingan & Konseling Indonesia', 'slug' => 'juntika-nurihsan'],
+            ['name' => 'Prof. Dr. Zadrian Ardi, S.Pd., M.Pd., Kons', 'role' => 'Guru Besar Bimbingan & Konseling', 'slug' => 'zadrian-ardi'],
+            ['name' => 'Prof. Dr. Nur Hidayah, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling UM', 'slug' => 'nur-hidayah'],
+            ['name' => 'Dr. Nur Mega Aris Saputra, S.Pd., M.Pd', 'role' => 'Ketua Tim Peneliti & Dosen BK FIP UM', 'slug' => 'aris-saputra'],
+            ['name' => 'Dr. Juwanto, S.Pd.I., M.Pd', 'role' => 'Dosen & Peneliti Bimbingan Konseling FIP UM', 'slug' => 'juwanto'],
+            ['name' => 'Ade Herdian Putra, S.Pd., M.Pd. Kons', 'role' => 'Konselor & Tim Peneliti BK FIP UM', 'slug' => 'ade-herdian'],
         ];
     @endphp
     <section class="bg-emerald-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -141,10 +141,24 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($developers as $idx => $dev)
+                    @php
+                        $photoFound = null;
+                        foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+                            $path = 'image/team/' . $dev['slug'] . '.' . $ext;
+                            if (file_exists(public_path($path))) {
+                                $photoFound = asset($path);
+                                break;
+                            }
+                        }
+                    @endphp
                     <div class="p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-lime-300 hover:bg-white/15 transition-all duration-300 flex flex-col justify-between group">
                         <div class="space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-lime-300 text-forest-950 font-black text-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                {{ strtoupper(substr(preg_replace('/^(Prof\.|Dr\.|M\.|Muh\.)\s*/i', '', $dev['name']), 0, 2)) }}
+                            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-gradient-to-tr from-emerald-500 to-lime-300 text-forest-950 font-black text-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300 border-2 border-white/20">
+                                @if($photoFound)
+                                    <img src="{{ $photoFound }}" alt="Foto {{ $dev['name'] }}" class="w-full h-full object-cover object-top">
+                                @else
+                                    <span>{{ strtoupper(substr(preg_replace('/^(Prof\.|Dr\.|M\.|Muh\.)\s*/i', '', $dev['name']), 0, 2)) }}</span>
+                                @endif
                             </div>
                             <div>
                                 <span class="text-[10px] font-black uppercase tracking-wider text-lime-300 block mb-1">Pengembang #0{{ $idx + 1 }}</span>
@@ -153,6 +167,12 @@
                             </div>
                         </div>
                         <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-bold text-emerald-300">
+                            <span>Departemen BK FIP UM</span>
+                            <span class="text-lime-300">✦</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
                             <span>Departemen BK FIP UM</span>
                             <span class="text-lime-300">✦</span>
                         </div>

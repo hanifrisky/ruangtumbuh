@@ -84,7 +84,7 @@
 
                     {{-- Explanatory Lead Paragraph --}}
                     <p class="text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
-                        Pusat bantuan pelaksanaan konseling online bermuatan nilai kearifan lokal untuk meningkatkan <em>well-being</em> pada remaja yang memiliki ide bunuh diri. Kami hadir mendampingi kamu menyelesaikan permasalahan dengan fokus pada pemulihan kondisi kesejahteraan psikologis untuk menghadapi masa depan penuh harapan.
+                        Pusat bantuan pelaksanaan konseling online bermuatan nilai kearifan lokal untuk meningkatkan <em>well-being</em> pada remaja yang beride bunuh diri. Kami hadir mendampingi kamu menyelesaikan permasalahan dengan fokus pada pemulihan kondisi kesejahteraan psikologis untuk menghadapi masa depan penuh harapan.
                     </p>
 
                     {{-- Action Buttons --}}
@@ -588,32 +588,48 @@
 
             @php
                 $pengembangList = [
-                    ['name' => 'Prof. Dr. M. Ramli, M.A', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Malang'],
-                    ['name' => 'Prof. Dr. Juntika Nurihsan, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Pendidikan Indonesia'],
-                    ['name' => 'Prof. Dr. Zadrian Ardi, S.Pd., M.Pd., Kons', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Padang'],
-                    ['name' => 'Prof. Dr. Nur Hidayah, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Malang'],
-                    ['name' => 'Dr. Nur Mega Aris Saputra, S.Pd., M.Pd', 'role' => 'Dosen & Peneliti Utama', 'inst' => 'Universitas Negeri Malang'],
-                    ['name' => 'Dr. Juwanto, S.Pd.I., M.Pd', 'role' => 'Dosen & Pengembang Model', 'inst' => 'Universitas Negeri Malang'],
-                    ['name' => 'Ade Herdian Putra, S.Pd., M.Pd. Kons', 'role' => 'Konselor & Pengembang Layanan', 'inst' => 'Universitas Negeri Padang'],
+                    ['name' => 'Prof. Dr. M. Ramli, M.A', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Malang', 'slug' => 'ramli'],
+                    ['name' => 'Prof. Dr. Juntika Nurihsan, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Pendidikan Indonesia', 'slug' => 'juntika-nurihsan'],
+                    ['name' => 'Prof. Dr. Zadrian Ardi, S.Pd., M.Pd., Kons', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Padang', 'slug' => 'zadrian-ardi'],
+                    ['name' => 'Prof. Dr. Nur Hidayah, M.Pd', 'role' => 'Guru Besar Bimbingan & Konseling', 'inst' => 'Universitas Negeri Malang', 'slug' => 'nur-hidayah'],
+                    ['name' => 'Dr. Nur Mega Aris Saputra, S.Pd., M.Pd', 'role' => 'Dosen & Peneliti Utama', 'inst' => 'Universitas Negeri Malang', 'slug' => 'aris-saputra'],
+                    ['name' => 'Dr. Juwanto, S.Pd.I., M.Pd', 'role' => 'Dosen & Pengembang Model', 'inst' => 'Universitas Prof. Dr. Hazarin, S.H. (UNIHAZ) Bengkulu', 'slug' => 'juwanto'],
+                    ['name' => 'Ade Herdian Putra, S.Pd., M.Pd. Kons', 'role' => 'Konselor & Pengembang Layanan', 'inst' => 'Universitas Negeri Padang', 'slug' => 'ade-herdian'],
                 ];
             @endphp
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 @foreach($pengembangList as $p)
-                    <div class="p-6 rounded-3xl bg-slate-50 border-2 border-emerald-100/90 hover:border-emerald-500 hover:bg-emerald-50/40 hover:shadow-md transition-all duration-300 space-y-3">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white font-black text-lg flex items-center justify-center shadow-sm">
-                            {{ substr($p['name'], 0, 1) }}
-                        </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base text-forest-950 leading-snug">
-                                {{ $p['name'] }}
-                            </h3>
-                            <p class="text-xs font-bold text-emerald-700 mt-1">
-                                {{ $p['role'] }}
-                            </p>
-                            <p class="text-xs text-slate-500 mt-0.5">
-                                {{ $p['inst'] }}
-                            </p>
+                    @php
+                        $photoFound = null;
+                        foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+                            $path = 'image/team/' . $p['slug'] . '.' . $ext;
+                            if (file_exists(public_path($path))) {
+                                $photoFound = asset($path);
+                                break;
+                            }
+                        }
+                    @endphp
+                    <div class="p-6 rounded-3xl bg-slate-50 border-2 border-emerald-100/90 hover:border-emerald-500 hover:bg-emerald-50/40 hover:shadow-md transition-all duration-300 space-y-4 flex flex-col justify-between group">
+                        <div class="space-y-4">
+                            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-gradient-to-tr from-emerald-600 to-forest-800 text-white font-black text-xl flex items-center justify-center shadow-md flex-shrink-0 border-2 border-emerald-200/50 group-hover:scale-105 transition-transform duration-300">
+                                @if($photoFound)
+                                    <img src="{{ $photoFound }}" alt="Foto {{ $p['name'] }}" class="w-full h-full object-cover object-top">
+                                @else
+                                    <span>{{ strtoupper(substr(preg_replace('/^(Prof\.|Dr\.|M\.|Muh\.)\s*/i', '', $p['name']), 0, 2)) }}</span>
+                                @endif
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-base text-forest-950 leading-snug group-hover:text-emerald-800 transition-colors">
+                                    {{ $p['name'] }}
+                                </h3>
+                                <p class="text-xs font-bold text-emerald-700 mt-1">
+                                    {{ $p['role'] }}
+                                </p>
+                                <p class="text-xs text-slate-500 mt-0.5">
+                                    {{ $p['inst'] }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
